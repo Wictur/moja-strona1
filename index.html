@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nowoczesna Strona</title>
+    <script src="https://cdn.tailwindcss.com?v=1.1"></script>
+    <style>
+      .glow {
+        color: white;
+        text-shadow: none; /* Usunięto cień */
+        transition: text-shadow 0.3s ease-in-out;
+      }
+
+      .glow:hover {
+        text-shadow: 0 0 6px #ffffff, 0 0 10px #6a5bfa, 0 0 15px #6a5bfa;
+      }
+
+      .button-glow {
+        background: linear-gradient(45deg, #6a5bfa, #8c6ae2);
+        border-radius: 12px;
+        padding: 12px 24px;
+        font-weight: bold;
+        color: white;
+        text-shadow: none; /* Usunięto cień */
+        box-shadow: 0 0 5px #6a5bfa, 0 0 10px #6a5bfa;
+        transition: all 0.3s ease;
+      }
+
+      .button-glow:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 15px #8c6ae2, 0 0 20px #6a5bfa;
+      }
+
+      .text-blue-400:hover {
+        text-decoration: underline;
+        text-decoration-color: #a3bffa;
+      }
+
+      body {
+        background-color: #1f1f1f;
+        color: #e0e0e0;
+      }
+
+      .section-background {
+        background: linear-gradient(135deg, rgba(54, 54, 70, 0.9), rgba(0, 0, 0, 0.6));
+      }
+
+      h1, h2, p {
+        color: white;
+        text-shadow: none;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-950 text-white font-sans">
+
+    <!-- Hero -->
+    <section class="min-h-screen flex flex-col justify-center items-center text-center px-6 bg-gradient-to-br from-blue-700 via-purple-600 to-pink-500">
+      <h1 class="text-4xl md:text-6xl font-bold mb-6 glow">
+        Witamy na naszej stronie
+      </h1>
+      <p class="text-lg md:text-xl mb-8 max-w-xl text-white">
+        Nowoczesny design. Szybkość. Niesamowite wrażenia.
+      </p>
+      <a href="#oferta" class="button-glow hover:bg-gray-100 transition">
+        Zobacz ofertę
+      </a>
+    </section>
+
+    <!-- Oferta -->
+    <section id="oferta" class="py-20 px-6 bg-gray-900">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 glow">
+        Nasze usługi
+      </h2>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div id="show-ad" class="cursor-pointer bg-gray-800 p-6 rounded-2xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-1 text-center">
+          <h3 class="text-xl font-bold mb-4">Tworzenie stron internetowych</h3>
+          <p class="text-white">Tworzymy responsywne i szybkie strony dopasowane do Twoich potrzeb.</p>
+        </div>
+
+        <div class="bg-gray-800 p-6 rounded-2xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-1 text-center">
+          <h3 class="text-xl font-bold mb-4">Usługa 2</h3>
+          <p class="text-white">Nowoczesne rozwiązania technologiczne.</p>
+        </div>
+
+        <a href="kontakt.html" class="bg-gray-800 p-6 rounded-2xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-1 text-center block">
+          <h3 class="text-xl font-bold mb-4">Kontakt</h3>
+          <p class="text-white">Kliknij, aby zobaczyć dane kontaktowe.</p>
+        </a>
+      </div>
+    </section>
+
+    <!-- Modal Reklamy -->
+    <div id="web-ad-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 hidden">
+      <div class="bg-white text-gray-900 p-8 rounded-2xl max-w-lg w-full shadow-2xl text-center relative">
+        <button onclick="closeAd()" class="absolute top-4 right-4 text-gray-900 hover:text-gray-800 text-xl">&times;</button>
+        <h2 class="text-2xl font-bold mb-1 text-black">Potrzebujesz strony internetowej?</h2>
+        <p class="mb-4 text-black font-medium leading-relaxed">
+          Oferujemy nowoczesne, szybkie i responsywne strony dopasowane do Twojego biznesu. Wybierz, co chcesz zrobić dalej!
+        </p>
+        <a href="oferta-strony.html" class="button-glow inline-block">Dowiedz się więcej</a>
+      </div>
+    </div>
+
+    <!-- Stopka -->
+    <footer class="bg-gray-950 text-center py-10 text-sm text-gray-400">
+      © 2025 Nowoczesna Strona. Wszelkie prawa zastrzeżone.
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+      const adModal = document.getElementById("web-ad-modal");
+      const showAdBtn = document.getElementById("show-ad");
+
+      showAdBtn.addEventListener("click", () => {
+        adModal.classList.remove("hidden");
+      });
+
+      function closeAd() {
+        adModal.classList.add("hidden");
+      }
+    </script>
+
+  </body>
+</html>
