@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SEO & Hosting</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* 🎨 Tło z połyskującym gradientem (stonowany) */
+    body {
+      background: linear-gradient(120deg, #3a0ca3, #4361ee, #4cc9f0);
+      background-size: 400% 400%;
+      animation: shineBackground 12s ease infinite;
+      font-family: 'Segoe UI', sans-serif;
+      color: #f1f5f9;
+    }
+
+    @keyframes shineBackground {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* 🧱 Karty usług - ciemne, nieprzezroczyste */
+    .glass {
+      background: linear-gradient(135deg, #1b1f2d, #252a3a);
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+      color: #f8f9fa;
+    }
+
+    .glass:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.6);
+    }
+
+    /* ✨ Glow animacja ikon (delikatna) */
+    @keyframes glow {
+      0% { box-shadow: 0 0 2px #7b2cbf, 0 0 5px #7b2cbf; }
+      100% { box-shadow: 0 0 4px #5a189a, 0 0 10px #5a189a; }
+    }
+
+    .text-4xl {
+      font-size: 2.25rem;
+      animation: glow 1.5s ease-in-out infinite alternate;
+      text-shadow: 0 0 6px rgba(123, 44, 191, 0.4), 0 0 12px rgba(90, 24, 154, 0.4);
+    }
+
+    /* 🔘 Przycisk CTA - stonowany gradient */
+    .glow-button {
+    padding: 12px 24px;
+    background: linear-gradient(45deg, #911286, #f97316); /* żółto-pomarańczowy gradient */
+    border-radius: 12px;
+    font-weight: bold;
+    color: #181515; /* ciemny tekst dla kontrastu */
+    text-transform: uppercase;
+    text-decoration: none;
+    box-shadow: 0 0 6px #facc15, 0 0 12px #f97316;
+    transition: all 0.3s ease;
+    }
+
+    .glow-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 12px #facc15, 0 0 20px #f97316;
+    }
+
+    /* 📋 Lista usług */
+    ul li {
+      font-size: 1rem;
+      color: #f1f1f1;
+    }
+
+    ul li:hover {
+      color: #90e0ef;
+    }
+
+    /* Kolorystyka nagłówków i ikon */
+    h1, h2 {
+      color: #ffffff;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .text-blue-300 {
+      color: #a5d8ff;
+    }
+
+    .text-blue-400 {
+      color: #74c0fc;
+    }
+
+    .text-cyan-400 {
+      color: #22d3ee;
+    }
+  </style>
+</head>
+<body class="px-6 py-10">
+
+  <!-- Nagłówek -->
+  <header class="text-center mb-16">
+    <h1 class="text-5xl font-bold text-white mb-4">SEO & Hosting</h1>
+    <p class="text-lg text-blue-300 max-w-2xl mx-auto">
+      Zadbaj o widoczność i wydajność swojej strony internetowej dzięki naszym kompleksowym usługom.
+    </p>
+  </header>
+
+  <!-- Usługi -->
+  <section class="grid md:grid-cols-2 gap-20 max-w-7xl mx-auto">
+    
+    <!-- Sekcja SEO -->
+    <div class="glass p-8 text-center">
+      <div class="text-4xl mb-4 text-blue-400">🔍</div>
+      <h2 class="text-2xl font-semibold mb-4 text-blue-300">SEO Usługi</h2>
+      <ul class="space-y-5 text-left list-disc list-inside">
+        <li>Analiza słów kluczowych i konkurencji</li>
+        <li>Tworzenie treści i metadanych</li>
+        <li>Optymalizacja kodu i szybkości</li>
+        <li>Konfiguracja sitemap.xml i robots.txt</li>
+        <li>Zgłoszenie do Google Search Console</li>
+      </ul>
+    </div>
+
+    <!-- Sekcja Hosting -->
+    <div class="glass p-8 text-center">
+      <div class="text-4xl mb-4 text-cyan-400">🖥️</div>
+      <h2 class="text-2xl font-semibold mb-4 text-blue-300">Hosting & Zarządzanie</h2>
+      <ul class="space-y-5 text-left list-disc list-inside">
+        <li>Szybki i bezpieczny hosting</li>
+        <li>Monitorowanie 24/7 i kopie zapasowe</li>
+        <li>Aktualizacje systemu i zabezpieczeń</li>
+        <li>Wsparcie techniczne i doradztwo</li>
+        <li>Elastyczne pakiety i skalowalność</li>
+      </ul>
+    </div>
+
+  </section>
+
+  <!-- Call to Action -->
+  <section class="text-center mt-20">
+    <h3 class="text-2xl font-bold mb-4">Chcesz rozwinąć swoją stronę?</h3>
+    <p class="mb-6 text-blue-300">Skontaktuj się z nami – dobierzemy najlepsze rozwiązania dla Ciebie.</p>
+    <a href="kontakt.html" class="glow-button inline-block">Skontaktuj się</a>
+  </section>
+
+  <!-- Stopka -->
+  <footer class="text-center mt-24 text-blue-200 text-sm">
+    © 2025 Nowoczesna Strona. Wszystkie prawa zastrzeżone.
+  </footer>
+
+</body>
+</html>

@@ -21,30 +21,16 @@
         box-shadow: 0 0 15px #8c6ae2, 0 0 20px #6a5bfa;
       }
 
-      /* Modal z ciemnym tłem i kontrastowym tekstem */
       .modal-content {
-  background-color: #2d2d2d;
-  color: gray;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6); /* CIENIE TŁA */
-  border-radius: 16px;
-}
+        background-color: #2d2d2d;
+        color: white;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+        border-radius: 16px;
+      }
 
-.modal-content h2 {
-  color: #ffffff;
-  font-weight: 700;
-  font-size: 1.5rem;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6); /* LEKKI CIEŃ TEKSTU */
-}
-
-.modal-content p {
-  font-size: 1rem;
-  color: white;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6); /* LEKKI CIEŃ TEKSTU */
-  line-height: 1.6;
-}
-
-      #contactModal {
-        z-index: 100;
+      .modal-content h2,
+      .modal-content p {
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
       }
 
       input,
@@ -61,15 +47,15 @@
       }
     </style>
   </head>
-  <body class="bg-gray-950 text-white font-sans">
+  <body class="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white font-sans">
 
     <!-- Hero Sekcja -->
     <section class="min-h-[60vh] flex flex-col items-center justify-center px-6 py-20 text-center">
       <h1 class="text-4xl md:text-5xl font-bold mb-6 text-white drop-shadow-lg">
         Tworzenie stron internetowych
       </h1>
-      <p class="text-lg max-w-2xl text-white/80 mb-10">
-        Oferujemy profesjonalne, szybkie i estetyczne strony internetowe – od prostych wizytówek po zaawansowane systemy. Nasz zespół zadba o responsywność, SEO i nowoczesny design.
+      <p class="text-lg max-w-3xl text-white/90 mb-10 leading-relaxed">
+        Tworzymy profesjonalne strony WWW dopasowane do Twojej marki, branży i klientów. Od eleganckich wizytówek po zaawansowane strony internetowe – zapewniamy <span class="text-indigo-400 font-semibold">design</span>, <span class="text-purple-400 font-semibold">funkcjonalność</span> i <span class="text-pink-400 font-semibold">technologię</span>, które działają.
       </p>
 
       <div class="grid gap-6 md:grid-cols-3 w-full max-w-4xl">
@@ -79,41 +65,55 @@
       </div>
     </section>
 
-    <!-- MODAL: Poprawiony kontakt i CTA -->
+    <!-- Dlaczego my -->
+    <section class="py-20 px-6 bg-gray-800/50 backdrop-blur-md">
+      <h2 class="text-3xl font-bold text-center mb-12">Dlaczego warto z nami?</h2>
+      <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto text-center">
+        <div class="p-6 rounded-xl bg-gray-900 shadow-lg">
+          <div class="text-4xl mb-4">⚡</div>
+          <h3 class="text-xl font-semibold mb-2 text-indigo-300">Błyskawiczne działanie</h3>
+          <p class="text-white/80">Optymalizacja kodu, obrazów i struktur sprawia, że Twoja strona ładuje się błyskawicznie.</p>
+        </div>
+        <div class="p-6 rounded-xl bg-gray-900 shadow-lg">
+          <div class="text-4xl mb-4">📱</div>
+          <h3 class="text-xl font-semibold mb-2 text-purple-300">Responsywność</h3>
+          <p class="text-white/80">Twoja strona będzie wyglądać świetnie na każdym urządzeniu – od smartfona po duży ekran.</p>
+        </div>
+        <div class="p-6 rounded-xl bg-gray-900 shadow-lg">
+          <div class="text-4xl mb-4">🔒</div>
+          <h3 class="text-xl font-semibold mb-2 text-pink-300">Bezpieczeństwo</h3>
+          <p class="text-white/80">Stosujemy najlepsze praktyki zabezpieczeń, w tym SSL, backupy i aktualizacje systemu.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Technologie -->
+    <section class="py-20 px-6 text-center">
+      <h2 class="text-3xl font-bold mb-12">Technologie, które stosujemy</h2>
+      <div class="flex flex-wrap justify-center gap-6 text-white/80 text-lg">
+        <span class="bg-gray-700 px-4 py-2 rounded-full">HTML5</span>
+        <span class="bg-gray-700 px-4 py-2 rounded-full">Tailwind CSS</span>
+        <span class="bg-gray-700 px-4 py-2 rounded-full">JavaScript</span>
+        <span class="bg-gray-700 px-4 py-2 rounded-full">SEO Tools</span>
+        <span class="bg-gray-700 px-4 py-2 rounded-full">Responsywność</span>
+      </div>
+    </section>
+
+    <!-- Modal -->
     <div id="contactModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 hidden">
-      <div class="modal-content p-8 rounded-xl max-w-md w-full shadow-xl relative z-100 text-center">
+      <div class="modal-content p-8 rounded-xl max-w-md w-full shadow-xl relative text-center">
         <button onclick="toggleForm()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">&times;</button>
+        <h2 class="text-2xl font-bold mb-4">Masz pytanie?</h2>
+        <p class="mb-6">Wypełnij formularz, a odpowiemy w ciągu 24 godzin. Możesz też od razu przejść do szczegółów oferty.</p>
+        <a href="oferta-strony.html" class="button-glow block w-full mb-6">Zobacz ofertę</a>
 
-        <!-- Poprawiony nagłówek i tekst -->
-        <h2 class="text-2xl font-bold mb-4">Potrzebujesz strony internetowej?</h2>
-        <p class="mb-6">
-          Oferujemy nowoczesne, szybkie i responsywne strony dopasowane do Twojego biznesu.<br>
-          Wybierz, co chcesz zrobić dalej!
-        </p>
-        <button class="button-glow w-full mb-6">Dowiedz się więcej</button>
-
-        <!-- Formularz kontaktowy -->
         <form action="https://formspree.io/f/manoodwa" method="POST" class="space-y-4 text-left">
-          <input
-            type="email"
-            name="email"
-            placeholder="Twój e-mail"
-            required
-            class="w-full px-4 py-2 rounded-md"
-          />
-          <textarea
-            name="message"
-            placeholder="Treść wiadomości"
-            required
-            rows="5"
-            class="w-full px-4 py-2 rounded-md"
-          ></textarea>
+          <input type="email" name="email" placeholder="Twój e-mail" required class="w-full px-4 py-2 rounded-md" />
+          <textarea name="message" placeholder="Treść wiadomości" required rows="5" class="w-full px-4 py-2 rounded-md"></textarea>
           <button type="submit" class="button-glow w-full">Wyślij wiadomość</button>
         </form>
 
-        <p class="text-sm text-gray-500 mt-4">
-          Twoje dane nie będą udostępniane osobom trzecim.
-        </p>
+        <p class="text-sm text-gray-500 mt-4">Twoje dane są bezpieczne – nie udostępniamy ich nikomu.</p>
       </div>
     </div>
 
@@ -122,7 +122,7 @@
       © 2025 Twoja Firma. Wszystkie prawa zastrzeżone.
     </footer>
 
-    <!-- JavaScript do modala -->
+    <!-- JS -->
     <script>
       function toggleForm() {
         document.getElementById("contactModal").classList.toggle("hidden");

@@ -8,7 +8,6 @@
     <style>
       .glow {
         color: white;
-        text-shadow: none; /* Usunięto cień */
         transition: text-shadow 0.3s ease-in-out;
       }
 
@@ -22,7 +21,6 @@
         padding: 12px 24px;
         font-weight: bold;
         color: white;
-        text-shadow: none; /* Usunięto cień */
         box-shadow: 0 0 5px #6a5bfa, 0 0 10px #6a5bfa;
         transition: all 0.3s ease;
       }
@@ -32,18 +30,9 @@
         box-shadow: 0 0 15px #8c6ae2, 0 0 20px #6a5bfa;
       }
 
-      .text-blue-400:hover {
-        text-decoration: underline;
-        text-decoration-color: #a3bffa;
-      }
-
       body {
         background-color: #1f1f1f;
         color: #e0e0e0;
-      }
-
-      .section-background {
-        background: linear-gradient(135deg, rgba(54, 54, 70, 0.9), rgba(0, 0, 0, 0.6));
       }
 
       h1, h2, p {
@@ -74,20 +63,32 @@
       </h2>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-        <div id="show-ad" class="cursor-pointer bg-gray-800 p-6 rounded-2xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-1 text-center">
-          <h3 class="text-xl font-bold mb-4">Tworzenie stron internetowych</h3>
-          <p class="text-white">Tworzymy responsywne i szybkie strony dopasowane do Twoich potrzeb.</p>
-        </div>
-
-        <div class="bg-gray-800 p-6 rounded-2xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-1 text-center">
-          <h3 class="text-xl font-bold mb-4">Usługa 2</h3>
-          <p class="text-white">Nowoczesne rozwiązania technologiczne.</p>
-        </div>
-
-        <a href="kontakt.html" class="bg-gray-800 p-6 rounded-2xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-1 text-center block">
-          <h3 class="text-xl font-bold mb-4">Kontakt</h3>
-          <p class="text-white">Kliknij, aby zobaczyć dane kontaktowe.</p>
+        <!-- Usługa 1 -->
+        <a href="oferta-strony.html" class="group bg-gradient-to-br from-indigo-700 via-purple-700 to-pink-700 p-6 rounded-2xl shadow-xl hover:shadow-2xl transition transform hover:-translate-y-1 text-center block">
+          <div class="text-4xl mb-4">💻</div>
+          <h3 class="text-xl font-bold mb-2 text-white group-hover:text-yellow-300 transition">Tworzenie stron internetowych</h3>
+          <p class="text-white text-sm leading-relaxed">
+            Projektujemy <span class="font-semibold text-pink-300">szybkie</span>, <span class="font-semibold text-purple-300">responsywne</span> i nowoczesne witryny dla firm i osób prywatnych.
+          </p>
         </a>
+
+        <!-- Usługa 2 -->
+        <a href="seo-hosting.html" class="group bg-gradient-to-br from-purple-700 via-indigo-700 to-blue-700 p-6 rounded-2xl shadow-xl hover:shadow-2xl transition transform hover:-translate-y-1 text-center block">
+          <div class="text-4xl mb-4">🌐</div>
+          <h3 class="text-xl font-bold mb-2 text-white group-hover:text-yellow-300 transition">SEO / Hosting & Zarządzanie</h3>
+          <p class="text-white text-sm leading-relaxed">
+            Zwiększ widoczność strony <span class="font-semibold text-green-300">w Google</span> i zapewnij jej <span class="font-semibold text-blue-300">stabilne działanie 24/7</span>.
+          </p>
+        </a>
+
+          <!-- Usługa 3 -->
+    <a href="kontakt.html" class="group bg-gradient-to-br from-blue-700 via-purple-700 to-pink-700 p-6 rounded-2xl shadow-xl hover:shadow-2xl transition transform hover:-translate-y-1 text-center block">
+      <div class="text-4xl mb-4">📞</div>
+      <h3 class="text-xl font-bold mb-2 text-white group-hover:text-yellow-300 transition">Kontakt i Wsparcie</h3>
+      <p class="text-white text-sm leading-relaxed">
+        Skontaktuj się z nami – <span class="font-semibold text-red-300">doradzimy</span>, <span class="font-semibold text-teal-300">wycenimy</span>, odpowiemy na każde pytanie.
+      </p>
+    </a>
       </div>
     </section>
 
@@ -113,7 +114,7 @@
       const adModal = document.getElementById("web-ad-modal");
       const showAdBtn = document.getElementById("show-ad");
 
-      showAdBtn.addEventListener("click", () => {
+      showAdBtn?.addEventListener("click", () => {
         adModal.classList.remove("hidden");
       });
 
