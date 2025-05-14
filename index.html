@@ -16,18 +16,18 @@
       }
 
       .button-glow {
-        background: linear-gradient(45deg, #6a5bfa, #8c6ae2);
+        background: linear-gradient(45deg, #ff8a00, #e52e71);
         border-radius: 12px;
         padding: 12px 24px;
         font-weight: bold;
         color: white;
-        box-shadow: 0 0 5px #6a5bfa, 0 0 10px #6a5bfa;
+        box-shadow: 0 0 5px #ff8a00, 0 0 10px #e52e71;
         transition: all 0.3s ease;
       }
 
       .button-glow:hover {
         transform: scale(1.05);
-        box-shadow: 0 0 15px #8c6ae2, 0 0 20px #6a5bfa;
+        box-shadow: 0 0 15px #e52e71, 0 0 20px #ff8a00;
       }
 
       body {
@@ -44,16 +44,42 @@
   <body class="bg-gray-950 text-white font-sans">
 
     <!-- Hero -->
-    <section class="min-h-screen flex flex-col justify-center items-center text-center px-6 bg-gradient-to-br from-blue-700 via-purple-600 to-pink-500">
+    <section class="relative min-h-screen flex flex-col justify-center items-center text-center px-6 bg-gradient-to-br from-blue-700 via-purple-600 to-pink-500 overflow-hidden">
       <h1 class="text-4xl md:text-6xl font-bold mb-6 glow">
         Witamy na naszej stronie
       </h1>
       <p class="text-lg md:text-xl mb-8 max-w-xl text-white">
         Nowoczesny design. Szybkość. Niesamowite wrażenia.
       </p>
-      <a href="#oferta" class="button-glow hover:bg-gray-100 transition">
+      <a href="#oferta" class="button-glow hover:bg-gray-100 transition mb-10">
         Zobacz ofertę
       </a>
+
+      <!-- Zalety -->
+      <div class="flex flex-wrap justify-center gap-6 text-white text-sm md:text-base">
+        <div class="flex items-center gap-2"><span>⚡</span> Szybkie ładowanie</div>
+        <div class="flex items-center gap-2"><span>📱</span> Responsywny design</div>
+        <div class="flex items-center gap-2"><span>🔒</span> Bezpieczeństwo</div>
+        <div class="flex items-center gap-2"><span>💡</span> Indywidualne podejście</div>
+      </div>
+
+      <!-- Strzałka w dół -->
+      <div class="absolute bottom-6 animate-bounce text-white text-3xl">
+        ↓
+      </div>
+
+      <!-- Dekoracyjne bąbelki -->
+      <svg class="absolute opacity-10 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="10%" cy="20%" r="60" fill="#ffffff22">
+          <animate attributeName="cy" values="20%;30%;20%" dur="6s" repeatCount="indefinite" />
+        </circle>
+        <circle cx="80%" cy="60%" r="40" fill="#ffffff33">
+          <animate attributeName="cy" values="60%;50%;60%" dur="8s" repeatCount="indefinite" />
+        </circle>
+        <circle cx="50%" cy="90%" r="30" fill="#ffffff11">
+          <animate attributeName="cy" values="90%;85%;90%" dur="5s" repeatCount="indefinite" />
+        </circle>
+      </svg>
     </section>
 
     <!-- Oferta -->
@@ -81,14 +107,14 @@
           </p>
         </a>
 
-          <!-- Usługa 3 -->
-    <a href="kontakt.html" class="group bg-gradient-to-br from-blue-700 via-purple-700 to-pink-700 p-6 rounded-2xl shadow-xl hover:shadow-2xl transition transform hover:-translate-y-1 text-center block">
-      <div class="text-4xl mb-4">📞</div>
-      <h3 class="text-xl font-bold mb-2 text-white group-hover:text-yellow-300 transition">Kontakt i Wsparcie</h3>
-      <p class="text-white text-sm leading-relaxed">
-        Skontaktuj się z nami – <span class="font-semibold text-red-300">doradzimy</span>, <span class="font-semibold text-teal-300">wycenimy</span>, odpowiemy na każde pytanie.
-      </p>
-    </a>
+        <!-- Usługa 3 -->
+        <a href="kontakt.html" class="group bg-gradient-to-br from-blue-700 via-purple-700 to-pink-700 p-6 rounded-2xl shadow-xl hover:shadow-2xl transition transform hover:-translate-y-1 text-center block">
+          <div class="text-4xl mb-4">📞</div>
+          <h3 class="text-xl font-bold mb-2 text-white group-hover:text-yellow-300 transition">Kontakt i Wsparcie</h3>
+          <p class="text-white text-sm leading-relaxed">
+            Skontaktuj się z nami – <span class="font-semibold text-red-300">doradzimy</span>, <span class="font-semibold text-teal-300">wycenimy</span>, odpowiemy na każde pytanie.
+          </p>
+        </a>
       </div>
     </section>
 
