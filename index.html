@@ -45,30 +45,16 @@
 
     <!-- Hero -->
     <section class="relative min-h-screen flex flex-col justify-center items-center text-center px-6 bg-gradient-to-br from-blue-700 via-purple-600 to-pink-500 overflow-hidden">
-      <h1 class="text-4xl md:text-6xl font-bold mb-6 glow">
-        Witamy na naszej stronie
-      </h1>
-      <p class="text-lg md:text-xl mb-8 max-w-xl text-white">
-        Nowoczesny design. Szybkość. Niesamowite wrażenia.
-      </p>
-      <a href="#oferta" class="button-glow hover:bg-gray-100 transition mb-10">
-        Zobacz ofertę
-      </a>
-
-      <!-- Zalety -->
+      <h1 class="text-4xl md:text-6xl font-bold mb-6 glow">Witamy na naszej stronie</h1>
+      <p class="text-lg md:text-xl mb-8 max-w-xl text-white">Nowoczesny design. Szybkość. Niesamowite wrażenia.</p>
+      <a href="#oferta" class="button-glow hover:bg-gray-100 transition mb-10">Zobacz ofertę</a>
       <div class="flex flex-wrap justify-center gap-6 text-white text-sm md:text-base">
         <div class="flex items-center gap-2"><span>⚡</span> Szybkie ładowanie</div>
         <div class="flex items-center gap-2"><span>📱</span> Responsywny design</div>
         <div class="flex items-center gap-2"><span>🔒</span> Bezpieczeństwo</div>
         <div class="flex items-center gap-2"><span>💡</span> Indywidualne podejście</div>
       </div>
-
-      <!-- Strzałka w dół -->
-      <div class="absolute bottom-6 animate-bounce text-white text-3xl">
-        ↓
-      </div>
-
-      <!-- Dekoracyjne bąbelki -->
+      <div class="absolute bottom-6 animate-bounce text-white text-3xl">↓</div>
       <svg class="absolute opacity-10 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="10%" cy="20%" r="60" fill="#ffffff22">
           <animate attributeName="cy" values="20%;30%;20%" dur="6s" repeatCount="indefinite" />
@@ -84,47 +70,77 @@
 
     <!-- Oferta -->
     <section id="oferta" class="py-20 px-6 bg-gray-900">
-      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 glow">
-        Nasze usługi
-      </h2>
-
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 glow">Nasze usługi</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-        <!-- Usługa 1 -->
         <a href="oferta-strony.html" class="group bg-gradient-to-br from-indigo-700 via-purple-700 to-pink-700 p-6 rounded-2xl shadow-xl hover:shadow-2xl transition transform hover:-translate-y-1 text-center block">
           <div class="text-4xl mb-4">💻</div>
           <h3 class="text-xl font-bold mb-2 text-white group-hover:text-yellow-300 transition">Tworzenie stron internetowych</h3>
-          <p class="text-white text-sm leading-relaxed">
-            Projektujemy <span class="font-semibold text-pink-300">szybkie</span>, <span class="font-semibold text-purple-300">responsywne</span> i nowoczesne witryny dla firm i osób prywatnych.
-          </p>
+          <p class="text-white text-sm leading-relaxed">Projektujemy <span class="font-semibold text-pink-300">szybkie</span>, <span class="font-semibold text-purple-300">responsywne</span> i nowoczesne witryny.</p>
         </a>
-
-        <!-- Usługa 2 -->
         <a href="seo-hosting.html" class="group bg-gradient-to-br from-purple-700 via-indigo-700 to-blue-700 p-6 rounded-2xl shadow-xl hover:shadow-2xl transition transform hover:-translate-y-1 text-center block">
           <div class="text-4xl mb-4">🌐</div>
           <h3 class="text-xl font-bold mb-2 text-white group-hover:text-yellow-300 transition">SEO / Hosting & Zarządzanie</h3>
-          <p class="text-white text-sm leading-relaxed">
-            Zwiększ widoczność strony <span class="font-semibold text-green-300">w Google</span> i zapewnij jej <span class="font-semibold text-blue-300">stabilne działanie 24/7</span>.
-          </p>
+          <p class="text-white text-sm leading-relaxed">Zwiększ widoczność <span class="font-semibold text-green-300">w Google</span> i zapewnij <span class="font-semibold text-blue-300">stabilność 24/7</span>.</p>
         </a>
-
-        <!-- Usługa 3 -->
         <a href="kontakt.html" class="group bg-gradient-to-br from-blue-700 via-purple-700 to-pink-700 p-6 rounded-2xl shadow-xl hover:shadow-2xl transition transform hover:-translate-y-1 text-center block">
           <div class="text-4xl mb-4">📞</div>
           <h3 class="text-xl font-bold mb-2 text-white group-hover:text-yellow-300 transition">Kontakt i Wsparcie</h3>
-          <p class="text-white text-sm leading-relaxed">
-            Skontaktuj się z nami – <span class="font-semibold text-red-300">doradzimy</span>, <span class="font-semibold text-teal-300">wycenimy</span>, odpowiemy na każde pytanie.
-          </p>
+          <p class="text-white text-sm leading-relaxed">Skontaktuj się z nami – <span class="font-semibold text-red-300">doradzimy</span>, <span class="font-semibold text-teal-300">wycenimy</span>.</p>
         </a>
       </div>
     </section>
 
-    <!-- Modal Reklamy -->
+    <!-- Dlaczego my -->
+    <section class="bg-gray-800 py-20 px-6 text-white">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 glow">Dlaczego warto nas wybrać?</h2>
+      <div class="grid gap-10 max-w-6xl mx-auto sm:grid-cols-2 md:grid-cols-3 text-center">
+        <div class="p-6 bg-gray-900 rounded-2xl shadow-md hover:shadow-xl transition">
+          <div class="text-4xl mb-4">🚀</div>
+          <h3 class="text-xl font-semibold mb-2">Błyskawiczne działanie</h3>
+          <p class="text-sm text-gray-300">Strony, które ładują się w ułamku sekundy.</p>
+        </div>
+        <div class="p-6 bg-gray-900 rounded-2xl shadow-md hover:shadow-xl transition">
+          <div class="text-4xl mb-4">📱</div>
+          <h3 class="text-xl font-semibold mb-2">Responsywność</h3>
+          <p class="text-sm text-gray-300">Doskonały wygląd na każdym urządzeniu.</p>
+        </div>
+        <div class="p-6 bg-gray-900 rounded-2xl shadow-md hover:shadow-xl transition">
+          <div class="text-4xl mb-4">🧠</div>
+          <h3 class="text-xl font-semibold mb-2">Nowoczesne technologie</h3>
+          <p class="text-sm text-gray-300">Zawsze zgodnie z najnowszymi trendami.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Jak działamy -->
+    <section class="bg-gray-900 py-20 px-6 text-white">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 glow">Jak działamy?</h2>
+      <div class="grid gap-10 max-w-5xl mx-auto sm:grid-cols-1 md:grid-cols-3 text-center">
+        <div class="p-6 bg-gray-800 rounded-2xl shadow-md">
+          <div class="text-3xl font-bold mb-2 text-yellow-400">1</div>
+          <h3 class="text-lg font-semibold mb-2">Kontakt</h3>
+          <p class="text-sm text-gray-300">Opowiedz nam, czego potrzebujesz – dobierzemy rozwiązanie.</p>
+        </div>
+        <div class="p-6 bg-gray-800 rounded-2xl shadow-md">
+          <div class="text-3xl font-bold mb-2 text-yellow-400">2</div>
+          <h3 class="text-lg font-semibold mb-2">Projekt</h3>
+          <p class="text-sm text-gray-300">Tworzymy projekt strony i wspólnie go dopracowujemy.</p>
+        </div>
+        <div class="p-6 bg-gray-800 rounded-2xl shadow-md">
+          <div class="text-3xl font-bold mb-2 text-yellow-400">3</div>
+          <h3 class="text-lg font-semibold mb-2">Realizacja</h3>
+          <p class="text-sm text-gray-300">Oddajemy gotową stronę i pomagamy ją uruchomić.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modal -->
     <div id="web-ad-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 hidden">
       <div class="bg-white text-gray-900 p-8 rounded-2xl max-w-lg w-full shadow-2xl text-center relative">
         <button onclick="closeAd()" class="absolute top-4 right-4 text-gray-900 hover:text-gray-800 text-xl">&times;</button>
         <h2 class="text-2xl font-bold mb-1 text-black">Potrzebujesz strony internetowej?</h2>
         <p class="mb-4 text-black font-medium leading-relaxed">
-          Oferujemy nowoczesne, szybkie i responsywne strony dopasowane do Twojego biznesu. Wybierz, co chcesz zrobić dalej!
+          Oferujemy nowoczesne, szybkie i responsywne strony dopasowane do Twojego biznesu.
         </p>
         <a href="oferta-strony.html" class="button-glow inline-block">Dowiedz się więcej</a>
       </div>
@@ -135,15 +151,13 @@
       © 2025 Nowoczesna Strona. Wszelkie prawa zastrzeżone.
     </footer>
 
-    <!-- JavaScript -->
+    <!-- Skrypt do modala -->
     <script>
       const adModal = document.getElementById("web-ad-modal");
       const showAdBtn = document.getElementById("show-ad");
-
       showAdBtn?.addEventListener("click", () => {
         adModal.classList.remove("hidden");
       });
-
       function closeAd() {
         adModal.classList.add("hidden");
       }
