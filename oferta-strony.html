@@ -128,6 +128,13 @@
       function toggleForm() {
         document.getElementById("contactModal").classList.toggle("hidden");
       }
+          document.querySelector("form").addEventListener("submit", function (e) {
+      const recaptcha = document.querySelector(".g-recaptcha-response").value;
+      if (!recaptcha) {
+        e.preventDefault();
+        alert("Potwierdź, że nie jesteś robotem.");
+      }
+    });
     </script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   </body>
