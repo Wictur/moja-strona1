@@ -3,25 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/png" href="favicon.png">
   <title>Formularz wyceny</title>
   <style>
     body {
       margin: 0;
       padding: 0;
       font-family: "Poppins", sans-serif;
-      background: linear-gradient(-45deg, #1c1b1b, #121212, #1c1b1b, #121212);
-      background-size: 400% 400%;
-      animation: gradient 15s ease infinite;
       height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
       color: white;
-    }
-    @keyframes gradient {
-      0% {background-position: 0% 50%;}
-      50% {background-position: 100% 50%;}
-      100% {background-position: 0% 50%;}
+      background: radial-gradient(circle at 20% 20%, rgba(0,255,255,0.1), transparent 50%),
+                  radial-gradient(circle at 80% 80%, rgba(0,255,144,0.1), transparent 50%),
+                  #121212;
     }
     h1 {
       font-size: 3rem;
@@ -30,6 +26,7 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       margin-bottom: 1rem;
+      text-align: center;
     }
     form {
       background: rgba(20, 20, 20, 0.8);
@@ -48,27 +45,22 @@
       flex-direction: column;
       gap: 1rem;
       animation: fadeIn 0.5s ease forwards;
+      font-size: 1.2rem;
     }
-    .step.active {
-      display: flex;
-    }
-    label {
-      font-weight: 700;
-      font-size: 1.1rem;
-    }
-    select, input[type="email"], input[type="text"] {
+    .step.active { display: flex; }
+    label { font-weight: 700; }
+    select, input, textarea {
       padding: 0.7rem 1rem;
       border-radius: 10px;
       border: none;
-      font-size: 1rem;
       background: #222;
       color: white;
       outline: none;
-      transition: background-color 0.3s ease;
+      font-size: 90%;
+      transition: background-color 0.3s;
     }
-    select:focus, input[type="email"]:focus, input[type="text"]:focus {
-      background: #333;
-    }
+    select:focus, input:focus, textarea:focus { background: #333; }
+    textarea { resize: vertical; min-height: 100px; }
     .buttons {
       display: flex;
       justify-content: space-between;
@@ -83,97 +75,84 @@
       font-weight: 800;
       border-radius: 15px;
       cursor: pointer;
-      transition: background 0.3s ease;
+      transition: background 0.3s;
       min-width: 100px;
     }
-    button:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
+    button:disabled { opacity: 0.5; cursor: not-allowed; }
     button:hover:not(:disabled) {
       background: linear-gradient(45deg, #00ff90, #00e0ff);
     }
-    #progressDots {
-      text-align: center;
-      margin-top: 1rem;
-      font-weight: 600;
-      color: #00ff90;
-    }
-    @keyframes fadeIn {
-      from {opacity: 0; transform: translateY(10px);}
-      to {opacity: 1; transform: translateY(0);}
-    }
-
-    /* --- EKRAN PODSUMOWANIA --- */
-    #summaryScreen.hidden {
-      display: none;
-    }
+    #progressDots { text-align: center; margin-top: 1rem; color: #00ff90; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px);} to { opacity: 1; transform: translateY(0);} }
+    #summaryScreen.hidden { display: none; }
     #summaryScreen {
-      position: fixed;
-      top: 0; left: 0;
+      position: fixed; top: 0; left: 0;
       width: 100%; height: 100%;
       background: rgba(0,0,0,0.6);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       z-index: 10;
     }
     .summary-content {
-      background: #fff;
-      color: #000;
-      padding: 2rem;
-      border-radius: 8px;
-      max-width: 90%;
-      width: 400px;
-      animation: fadeInSummary 0.5s ease-out forwards;
-    }
-    @keyframes fadeInSummary {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
+      background: #fff; color: #000;
+      padding: 2rem; border-radius: 8px;
+      max-width: 400px; width: 90%;
+      animation: fadeIn 0.5s ease-out forwards;
     }
     .summary-content h2 {
-      margin-top: 0;
       background: linear-gradient(45deg, #00e0ff, #00ff90);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-    .summary-content ul {
-      list-style: none;
-      padding: 0;
-    }
-    .summary-content li {
-      margin: 0.5rem 0;
-    }
+    .summary-content ul { list-style: none; padding: 0; }
+    .summary-content li { margin: 0.5rem 0; }
+    /* --- Specjalne ustawienia dla kroku dynamicznego (step3) --- */
+.step#step3 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;  /* wycentruje poziomo */
+}
+
+#questionText {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+#dynamicQuestionsContainer {
+  display: flex;
+  flex-direction: column;  /* <--- tutaj zmiana z row na column */
+  width: 100%;
+  max-width: 600px;        /* lub inna wartość */
+}
+
+#dynamicQuestionsContainer textarea {
+  width: 100%;
+  min-height: 200px;       /* wysokość wedle potrzeb */
+  resize: vertical;
+}
+
   </style>
-  <script type="text/javascript" src="https://cdn.emailjs.com/sdk/3.2/email.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3.11.0/dist/email.min.js"></script>
-<script>
-  emailjs.init('FhX2ZzMieosl6KscW');
-</script>
-<script>
-  (function(){
-    emailjs.init("FhX2ZzMieosl6KscW"); // np. emailjs.init("user_xxx");
-  })();
-</script>
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3.11.0/dist/email.min.js" defer></script>
+  <script defer>
+    window.addEventListener('DOMContentLoaded', () => emailjs.init('FhX2ZzMieosl6KscW'));
+  </script>
 </head>
 <body>
   <form id="quoteForm" novalidate>
     <h1>Formularz wyceny</h1>
-
-    <!-- Krok 1: klient -->
+    <div id="questionText"></div>
     <div class="step active" id="step0">
       <label for="klient">Jesteś:</label>
-      <select name="klient" id="klient" required>
+      <select id="klient" required>
         <option value="">Wybierz</option>
         <option value="prywatny">Klient prywatny</option>
         <option value="firma">Firma</option>
       </select>
     </div>
-
-    <!-- Krok 2: rodzaj strony -->
     <div class="step" id="step1">
-      <label for="strona">Wybierz rodzaj strony:</label>
-      <select name="strona" id="strona" required>
+      <label for="strona">Rodzaj strony:</label>
+      <select id="strona" required>
         <option value="">Wybierz</option>
         <option value="wizytowka">Strona wizytówka</option>
         <option value="landing">Landing Page</option>
@@ -188,59 +167,46 @@
         <option value="aplikacja">Aplikacja webowa</option>
       </select>
     </div>
-
-    <!-- Krok 3: email -->
     <div class="step" id="step2">
-      <label for="email">Podaj swój adres e-mail:</label>
-      <input type="email" id="email" name="email" placeholder="np. jan@poczta.pl" required />
+      <label for="email">Twój e-mail:</label>
+      <input type="email" id="email" required placeholder="jan@poczta.pl">
     </div>
-
-    <!-- Krok 4: pytania dynamiczne -->
     <div class="step" id="step3">
       <div id="dynamicQuestionsContainer"></div>
     </div>
-
     <div class="buttons">
-      <button type="button" id="prevBtn" style="display:none;">Wstecz</button>
+      <button type="button" id="prevBtn" disabled>Wstecz</button>
       <button type="button" id="nextBtn">Dalej</button>
-      <button type="submit" id="finishBtn" style="display:none;">Zakończ</button>
+      <button type="button" id="finishBtn" style="display:none;">Zakończ</button>
     </div>
-
     <div id="progressDots"></div>
   </form>
 
-  <!-- Ekran podsumowania -->
   <div id="summaryScreen" class="hidden">
     <div class="summary-content">
-      <h2>Dziękujemy za wypełnienie formularza!</h2>
-      <p>Oto podsumowanie Twoich odpowiedzi:</p>
+      <h2>Dziękujemy!</h2>
       <ul id="summaryList"></ul>
       <button id="restartBtn">Wypełnij ponownie</button>
     </div>
   </div>
 
-  <script>
-  const form = document.getElementById('quoteForm');
-  const steps = document.querySelectorAll('.step');
-  const prevBtn = document.getElementById('prevBtn');
-  const nextBtn = document.getElementById('nextBtn');
-  const finishBtn = document.getElementById('finishBtn');
-  const progressDots = document.getElementById('progressDots');
+<script defer>
+document.addEventListener('DOMContentLoaded', () => {
+  const steps            = document.querySelectorAll('.step');
+  const nextBtn          = document.getElementById('nextBtn');
+  const prevBtn          = document.getElementById('prevBtn');
+  const finishBtn        = document.getElementById('finishBtn');
+  const questionText     = document.getElementById('questionText');
   const dynamicContainer = document.getElementById('dynamicQuestionsContainer');
-  const summaryScreen = document.getElementById('summaryScreen');
-  const summaryList = document.getElementById('summaryList');
-  const restartBtn = document.getElementById('restartBtn');
+  const form             = document.getElementById('quoteForm');
+  const summaryScreen    = document.getElementById('summaryScreen');
+  const summaryList      = document.getElementById('summaryList');
+  const restartBtn       = document.getElementById('restartBtn');
 
   let currentStep = 0;
   let currentQuestionIndex = 0;
-  let currentQuestions = [];
-
-  const answers = {
-    clientType: '',
-    siteType: '',
-    email: '',
-    dynamicAnswers: {}
-  };
+  let dynamicQuestions = [];
+  const answers = {};
 
   const questionsByType = {
     wizytowka: {
@@ -443,199 +409,176 @@
       ]
     }
   };
+  const siteNames = {
+    wizytowka:      'Strona wizytówka',
+    landing:        'Landing Page',
+    sklep:          'Sklep internetowy',
+    blog:           'Blog',
+    portfolio:      'Portfolio',
+    rezerwacja:     'System rezerwacji',
+    ogloszeniowy:   'Serwis ogłoszeniowy',
+    spolecznosciowy:'Portal społecznościowy',
+    edukacyjna:     'Strona edukacyjna',
+    intranet:       'Intranet',
+    aplikacja:      'Aplikacja webowa'
+  };
+
+  function showStep(i) {
+    steps.forEach((s, idx) => s.classList.toggle('active', idx === i));
+    updateButtons();
+    renderProgress(i);
+    if (i === 3) renderDynamic();
+  }
+
+  function renderProgress(i) {
+    const dots = Array.from({ length: steps.length }, (_, j) => j === i ? '●' : '○').join(' ');
+    document.getElementById('progressDots').textContent = dots;
+  }
+
+function renderDynamic() {
+  dynamicContainer.innerHTML = '';
+  const q = dynamicQuestions[currentQuestionIndex];
+  questionText.textContent = `Pytanie ${currentQuestionIndex + 1} z ${dynamicQuestions.length}`;
   
+  const label = document.createElement('label');
+  label.textContent = q;
+  label.style.fontWeight = 'bold'; // pogrubienie pytania
+  
+  const ta = document.createElement('textarea');
+  ta.id = 'dynamicAnswer'; // ← dodane
+  ta.value = answers[`dyn_${currentQuestionIndex}`] || '';
+  ta.addEventListener('input', e => answers[`dyn_${currentQuestionIndex}`] = e.target.value);
 
-  function showStep(n) {
-    steps.forEach((s, i) => s.classList.toggle('active', i === n));
-    currentStep = n;
+  dynamicContainer.append(label, ta);
+  updateButtons();
+}
 
-    prevBtn.style.display = (n === 0) ? 'none' : 'inline-block';
 
-    if (n < 3) {
-      // Krok 0,1,2 - standardowy flow
-      nextBtn.style.display = 'inline-block';
-      finishBtn.style.display = 'none';
-      dynamicContainer.innerHTML = '';
-    } else if (n === 3) {
-      // Krok 3 - dynamiczne pytania
-      nextBtn.style.display = (currentQuestionIndex < currentQuestions.length - 1) ? 'inline-block' : 'none';
-      finishBtn.style.display = (currentQuestionIndex === currentQuestions.length - 1) ? 'inline-block' : 'none';
-    } else if (n === 4) {
-      // Podsumowanie (ukryj wszystkie przyciski)
-      nextBtn.style.display = 'none';
-      prevBtn.style.display = 'none';
-      finishBtn.style.display = 'none';
-    }
-
-    updateProgressDots();
-  }
-
-  function updateProgressDots() {
-    if (currentStep < 3) {
-      progressDots.textContent = `Strona ${currentStep + 1} z 3`;
-    } else if (currentStep === 3) {
-      progressDots.textContent = `Pytanie ${currentQuestionIndex + 1} z ${currentQuestions.length}`;
+  function updateButtons() {
+    if (currentStep === 3 && dynamicQuestions.length) {
+      const isLast = currentQuestionIndex === dynamicQuestions.length - 1;
+      nextBtn.style.display   = isLast ? 'none' : '';
+      finishBtn.style.display = isLast ? '' : 'none';
+      prevBtn.disabled = false;
     } else {
-      progressDots.textContent = '';
+      nextBtn.style.display   = '';
+      finishBtn.style.display = 'none';
+      prevBtn.disabled = currentStep === 0;
     }
   }
 
-  function validateStep() {
-    if (currentStep === 0) {
-      return !!document.getElementById('klient').value || alert("Wybierz typ klienta");
-    }
-    if (currentStep === 1) {
-      return !!document.getElementById('strona').value || alert("Wybierz rodzaj strony");
-    }
-    if (currentStep === 2) {
-      const em = document.getElementById('email');
-      const ok = em.value.trim() && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value);
-      return ok || alert("Podaj poprawny e-mail");
-    }
-    if (currentStep === 3) {
-      const inp = document.getElementById('dynamicAnswer');
-      return !!(inp && inp.value.trim()) || alert("Odpowiedz na pytanie");
-    }
-    return true;
+nextBtn.addEventListener('click', () => {
+  if (currentStep === 0) {
+    const val = document.getElementById('klient').value;
+    if (!val) return alert('Wybierz typ klienta.');
+    answers.clientType = val;
   }
 
-  function generateDynamicQuestion(idx) {
-    dynamicContainer.innerHTML = '';
-    if (idx < currentQuestions.length) {
-      const q = currentQuestions[idx];
-      const label = document.createElement('label');
-      label.textContent = q;
-      label.htmlFor = 'dynamicAnswer';
-      const input = document.createElement('input');
-      input.type = 'text';
-      input.id = 'dynamicAnswer';
-      input.name = 'dynamicAnswer';
-      input.required = true;
-      input.placeholder = 'Twoja odpowiedź...';
-      if (answers.dynamicAnswers[q]) input.value = answers.dynamicAnswers[q];
-      dynamicContainer.append(label, input);
-    }
-    updateProgressDots();
+  if (currentStep === 1) {
+    const val = document.getElementById('strona').value;
+    if (!val) return alert('Wybierz typ strony.');
+    answers.siteType = val;
   }
 
-  nextBtn.addEventListener('click', () => {
-    if (!validateStep()) return;
+  if (currentStep === 2) {
+    const val = document.getElementById('email').value;
+    if (!val.includes('@')) return alert('Podaj poprawny e-mail.');
+    answers.email = val;
 
-    if (currentStep === 0) {
-      answers.clientType = document.getElementById('klient').value;
-      showStep(1);
-    } else if (currentStep === 1) {
-      answers.siteType = document.getElementById('strona').value;
-      // Załaduj pytania dynamiczne po wybraniu klienta i rodzaju strony
-      currentQuestions = questionsByType[answers.siteType]?.[answers.clientType] || [];
-      currentQuestionIndex = 0;
-      showStep(2);
-    } else if (currentStep === 2) {
-      answers.email = document.getElementById('email').value.trim();
-      if (currentQuestions.length > 0) {
-        showStep(3);
-        generateDynamicQuestion(currentQuestionIndex);
-      } else {
-        // brak pytań dynamicznych, przejdź do podsumowania
-        showSummary();
-      }
-    } else if (currentStep === 3) {
-      // Zapisz odpowiedź bieżącego pytania
-      const q = currentQuestions[currentQuestionIndex];
-      const ans = document.getElementById('dynamicAnswer').value.trim();
-      answers.dynamicAnswers[q] = ans;
+    // Wczytanie pytań i przejście do pierwszego
+    dynamicQuestions = (questionsByType[answers.siteType] || {})[answers.clientType] || [];
+    currentQuestionIndex = 0;
+  }
 
+  if (currentStep === 3) {
+    // Sprawdzenie poprawności odpowiedzi dynamicznej
+    const ta = document.getElementById('dynamicAnswer');
+    if (!ta || !ta.value.trim()) {
+      return alert('Uzupełnij odpowiedź przed przejściem dalej.');
+    }
+
+    answers[`dyn_${currentQuestionIndex}`] = ta.value.trim();
+
+    if (currentQuestionIndex < dynamicQuestions.length - 1) {
       currentQuestionIndex++;
-      if (currentQuestionIndex < currentQuestions.length) {
-        generateDynamicQuestion(currentQuestionIndex);
-        showStep(3);
-      } else {
-        // skończyły się pytania dynamiczne - pokaż finish button
-        showStep(3); // przeładuj stan przycisków
-      }
-    }
-  });
-
-  prevBtn.addEventListener('click', () => {
-    if (currentStep === 3) {
-      if (currentQuestionIndex > 0) {
-        currentQuestionIndex--;
-        generateDynamicQuestion(currentQuestionIndex);
-        showStep(3);
-      } else {
-        showStep(2);
-      }
-    } else if (currentStep > 0) {
-      showStep(currentStep - 1);
-    }
-  });
-
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    // Nie wysyłamy tutaj, tylko na finishBtn
-  });
-
- finishBtn.addEventListener('click', () => {
-  if (!validateStep()) return;
-
-  // Zawsze zapisuj ostatnią odpowiedź jeśli jest input i wartość
-  const inp = document.getElementById('dynamicAnswer');
-  if (inp) {
-    const q = currentQuestions[currentQuestionIndex] || currentQuestions[currentQuestionIndex - 1];
-    if (q) {
-      answers.dynamicAnswers[q] = inp.value.trim();
+      renderDynamic(); // ← po tym textarea już istnieje
+      return;
     }
   }
 
-  sendEmail();
+  if (currentStep < steps.length - 1) {
+    currentStep++;
+    showStep(currentStep);
+  }
 });
 
 
- function sendEmail() {
-  finishBtn.disabled = true;  // zablokuj przycisk na czas wysyłki
-  const emailParams = {
-    klient: answers.clientType,
-    strona: answers.siteType,
-    email: answers.email,
-    odpowiedzi: Object.entries(answers.dynamicAnswers)
-      .map(([pytanie, odp]) => `${pytanie}: ${odp}`)
-      .join('\n'),
-  };
 
-  emailjs.send('service_rvaizhs', 'template_v2a9jwl', emailParams)
-    .then(() => {
-      alert('Wiadomość wysłana poprawnie!');
-      showSummary();
-    })
-    .catch((error) => {
-      alert('Błąd podczas wysyłki: ' + error.text);
-      finishBtn.disabled = false;  // odblokuj przycisk jeśli błąd
-    });
-}
 
-  function showSummary() {
-    form.style.display = 'none';
-    summaryList.innerHTML = `
-      <li><strong>Klient:</strong> ${answers.clientType}</li>
-      <li><strong>Rodzaj strony:</strong> ${answers.siteType}</li>
-      <li><strong>Email:</strong> ${answers.email}</li>
-    `;
-    for (const [q, a] of Object.entries(answers.dynamicAnswers)) {
-      summaryList.innerHTML += `<li><strong>${q}</strong>: ${a}</li>`;
+  prevBtn.addEventListener('click', () => {
+    if (currentStep === 3 && currentQuestionIndex > 0) {
+      currentQuestionIndex--;
+      renderDynamic();
+      return;
     }
-    summaryScreen.classList.remove('hidden');
-    showStep(4); // krok podsumowania
-  }
-
-  restartBtn.addEventListener('click', () => {
-    location.reload();
+    if (currentStep > 0) {
+      currentStep--;
+      showStep(currentStep);
+    }
   });
 
-  // Inicjalizacja EmailJS
-  emailjs.init("FhX2ZzMieosl6KscW");
+finishBtn.addEventListener('click', () => {
+  if (finishBtn.disabled) return;    // jeśli już kliknięty – nie rób nic
+  finishBtn.disabled = true;         // blokujemy kolejny klik
 
-  // Startujemy od pierwszego kroku
+  const templateParams = {
+    klient: answers.clientType === 'firma' ? 'Firma' : 'Klient prywatny',
+    strona: siteNames[answers.siteType] || answers.siteType,
+    email:  answers.email,
+    odpowiedzi: dynamicQuestions
+  .map((q, i) =>
+    `<strong>${q}</strong><br>${answers['dyn_' + i] || 'Brak odpowiedzi'}<br><br>`
+  )
+  .join('')
+
+  };
+
+    // 2) Wysłanie maila
+    emailjs.send('service_rvaizhs', 'template_v2a9jwl', templateParams)
+      .then(() => {
+        // 3) Pokaż podsumowanie
+        form.style.display = 'none';
+        summaryScreen.classList.remove('hidden');
+        summaryList.innerHTML = '';
+
+        // dodaj klienta, typ strony i e-mail
+        summaryList.innerHTML += `
+          <li><strong>Jesteś:</strong> ${answers.clientType === 'firma' ? 'Firma' : 'Klient prywatny'}</li>
+          <li><strong>Rodzaj strony:</strong> ${siteNames[answers.siteType] || answers.siteType}</li>
+          <li><strong>Email:</strong> ${answers.email}</li>
+        `;
+
+        // dodaj pytania i odpowiedzi
+        dynamicQuestions.forEach((q, i) => {
+          const ans = answers[`dyn_${i}`] || 'Brak odpowiedzi';
+          summaryList.innerHTML += `
+            <li>
+              <strong>${q}</strong><br>
+              ${ans}
+            </li>
+          `;
+        });
+      })
+      .catch(err => {
+        console.error('EmailJS Error:', err);
+        alert('Błąd wysyłki maila.');
+      });
+  });
+
+  restartBtn.addEventListener('click', () => window.location.reload());
+
   showStep(0);
+});
 </script>
 
 </body>
