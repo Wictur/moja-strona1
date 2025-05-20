@@ -1,109 +1,642 @@
 <!DOCTYPE html>
 <html lang="pl">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Zamów wycenę strony</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-      body {
-        background-color: #1e1e2f;
-        color: white;
-        font-family: 'Segoe UI', sans-serif;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Formularz wyceny</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(-45deg, #1c1b1b, #121212, #1c1b1b, #121212);
+      background-size: 400% 400%;
+      animation: gradient 15s ease infinite;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+    }
+    @keyframes gradient {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+    h1 {
+      font-size: 3rem;
+      font-weight: 900;
+      background: linear-gradient(45deg, #00e0ff, #00ff90);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
+    form {
+      background: rgba(20, 20, 20, 0.8);
+      padding: 2rem;
+      border-radius: 15px;
+      max-width: 700px;
+      width: 90%;
+      box-shadow: 0 0 30px rgba(0,255,255,0.4);
+      backdrop-filter: blur(10px);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .step {
+      display: none;
+      flex-direction: column;
+      gap: 1rem;
+      animation: fadeIn 0.5s ease forwards;
+    }
+    .step.active {
+      display: flex;
+    }
+    label {
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+    select, input[type="email"], input[type="text"] {
+      padding: 0.7rem 1rem;
+      border-radius: 10px;
+      border: none;
+      font-size: 1rem;
+      background: #222;
+      color: white;
+      outline: none;
+      transition: background-color 0.3s ease;
+    }
+    select:focus, input[type="email"]:focus, input[type="text"]:focus {
+      background: #333;
+    }
+    .buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1rem;
+    }
+    button {
+      background: linear-gradient(45deg, #00e0ff, #00ff90);
+      border: none;
+      color: black;
+      padding: 0.7rem 1.5rem;
+      font-size: 1.1rem;
+      font-weight: 800;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      min-width: 100px;
+    }
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    button:hover:not(:disabled) {
+      background: linear-gradient(45deg, #00ff90, #00e0ff);
+    }
+    #progressDots {
+      text-align: center;
+      margin-top: 1rem;
+      font-weight: 600;
+      color: #00ff90;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(10px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
 
-      .form-section {
-        background-color: #2d2d3f;
-        border-radius: 1rem;
-        padding: 2rem;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
-      }
+    /* --- EKRAN PODSUMOWANIA --- */
+    #summaryScreen.hidden {
+      display: none;
+    }
+    #summaryScreen {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
+    .summary-content {
+      background: #fff;
+      color: #000;
+      padding: 2rem;
+      border-radius: 8px;
+      max-width: 90%;
+      width: 400px;
+      animation: fadeInSummary 0.5s ease-out forwards;
+    }
+    @keyframes fadeInSummary {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .summary-content h2 {
+      margin-top: 0;
+      background: linear-gradient(45deg, #00e0ff, #00ff90);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .summary-content ul {
+      list-style: none;
+      padding: 0;
+    }
+    .summary-content li {
+      margin: 0.5rem 0;
+    }
+  </style>
+  <script type="text/javascript" src="https://cdn.emailjs.com/sdk/3.2/email.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3.11.0/dist/email.min.js"></script>
+<script>
+  emailjs.init('FhX2ZzMieosl6KscW');
+</script>
+<script>
+  (function(){
+    emailjs.init("FhX2ZzMieosl6KscW"); // np. emailjs.init("user_xxx");
+  })();
+</script>
+</head>
+<body>
+  <form id="quoteForm" novalidate>
+    <h1>Formularz wyceny</h1>
 
-      .button-glow {
-        background: linear-gradient(45deg, #6a5bfa, #8c6ae2);
-        border-radius: 12px;
-        padding: 12px 24px;
-        font-weight: bold;
-        color: white;
-        box-shadow: 0 0 5px #6a5bfa, 0 0 10px #6a5bfa;
-        transition: all 0.3s ease;
-      }
-
-      .button-glow:hover {
-        transform: scale(1.05);
-        box-shadow: 0 0 15px #8c6ae2, 0 0 20px #6a5bfa;
-      }
-
-      input,
-      select,
-      textarea {
-        background-color: #3a3a4d;
-        color: white;
-        border: 1px solid #555;
-        padding: 10px;
-        border-radius: 8px;
-        width: 100%;
-      }
-
-      input:focus,
-      select:focus,
-      textarea:focus {
-        border-color: #6a5bfa;
-        outline: none;
-      }
-    </style>
-  </head>
-  <body class="min-h-screen flex items-center justify-center p-6">
-
-    <div class="form-section max-w-2xl w-full">
-      <h1 class="text-3xl font-bold text-center mb-6">Zamów bezpłatną wycenę</h1>
-
-      <form action="https://formspree.io/f/manoodwa" method="POST" class="space-y-5">
-        <div>
-          <label for="company" class="block mb-2 font-semibold">Nazwa firmy (lub imię):</label>
-          <input type="text" id="company" name="company" required />
-        </div>
-
-        <div>
-          <label for="type" class="block mb-2 font-semibold">Typ strony:</label>
-          <select id="type" name="type" required>
-            <option value="" disabled selected>Wybierz typ</option>
-            <option>Strona wizytówka</option>
-            <option>Sklep internetowy</option>
-            <option>Landing page</option>
-            <option>Blog</option>
-            <option>Inny typ</option>
-          </select>
-        </div>
-
-        <div>
-          <label for="budget" class="block mb-2 font-semibold">Budżet:</label>
-          <select id="budget" name="budget" required>
-            <option value="" disabled selected>Wybierz zakres</option>
-            <option>&lt; 1000 zł</option>
-            <option>1000–3000 zł</option>
-            <option>3000–5000 zł</option>
-            <option>&gt; 5000 zł</option>
-          </select>
-        </div>
-
-        <div>
-          <label for="details" class="block mb-2 font-semibold">Opis projektu:</label>
-          <textarea id="details" name="details" rows="5" placeholder="Opisz krótko, czego potrzebujesz..." required></textarea>
-        </div>
-
-        <div>
-          <label for="email" class="block mb-2 font-semibold">Twój e-mail kontaktowy:</label>
-          <input type="email" id="email" name="email" required />
-        </div>
-
-        <button type="submit" class="button-glow w-full mt-4">Wyślij zapytanie</button>
-      </form>
-
-      <p class="text-sm text-gray-400 mt-6 text-center">
-        Odpowiadamy w ciągu 72 godzin. Twoje dane są bezpieczne.
-      </p>
+    <!-- Krok 1: klient -->
+    <div class="step active" id="step0">
+      <label for="klient">Jesteś:</label>
+      <select name="klient" id="klient" required>
+        <option value="">Wybierz</option>
+        <option value="prywatny">Klient prywatny</option>
+        <option value="firma">Firma</option>
+      </select>
     </div>
 
-  </body>
+    <!-- Krok 2: rodzaj strony -->
+    <div class="step" id="step1">
+      <label for="strona">Wybierz rodzaj strony:</label>
+      <select name="strona" id="strona" required>
+        <option value="">Wybierz</option>
+        <option value="wizytowka">Strona wizytówka</option>
+        <option value="landing">Landing Page</option>
+        <option value="sklep">Sklep internetowy</option>
+        <option value="blog">Blog</option>
+        <option value="portfolio">Portfolio</option>
+        <option value="rezerwacja">System rezerwacji</option>
+        <option value="ogloszeniowy">Serwis ogłoszeniowy</option>
+        <option value="spolecznosciowy">Portal społecznościowy</option>
+        <option value="edukacyjna">Strona edukacyjna dla dzieci</option>
+        <option value="intranet">Intranet dla firmy</option>
+        <option value="aplikacja">Aplikacja webowa</option>
+      </select>
+    </div>
+
+    <!-- Krok 3: email -->
+    <div class="step" id="step2">
+      <label for="email">Podaj swój adres e-mail:</label>
+      <input type="email" id="email" name="email" placeholder="np. jan@poczta.pl" required />
+    </div>
+
+    <!-- Krok 4: pytania dynamiczne -->
+    <div class="step" id="step3">
+      <div id="dynamicQuestionsContainer"></div>
+    </div>
+
+    <div class="buttons">
+      <button type="button" id="prevBtn" style="display:none;">Wstecz</button>
+      <button type="button" id="nextBtn">Dalej</button>
+      <button type="submit" id="finishBtn" style="display:none;">Zakończ</button>
+    </div>
+
+    <div id="progressDots"></div>
+  </form>
+
+  <!-- Ekran podsumowania -->
+  <div id="summaryScreen" class="hidden">
+    <div class="summary-content">
+      <h2>Dziękujemy za wypełnienie formularza!</h2>
+      <p>Oto podsumowanie Twoich odpowiedzi:</p>
+      <ul id="summaryList"></ul>
+      <button id="restartBtn">Wypełnij ponownie</button>
+    </div>
+  </div>
+
+  <script>
+  const form = document.getElementById('quoteForm');
+  const steps = document.querySelectorAll('.step');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const finishBtn = document.getElementById('finishBtn');
+  const progressDots = document.getElementById('progressDots');
+  const dynamicContainer = document.getElementById('dynamicQuestionsContainer');
+  const summaryScreen = document.getElementById('summaryScreen');
+  const summaryList = document.getElementById('summaryList');
+  const restartBtn = document.getElementById('restartBtn');
+
+  let currentStep = 0;
+  let currentQuestionIndex = 0;
+  let currentQuestions = [];
+
+  const answers = {
+    clientType: '',
+    siteType: '',
+    email: '',
+    dynamicAnswers: {}
+  };
+
+  const questionsByType = {
+    wizytowka: {
+      firma: [
+        "Jaka jest branża Twojej firmy?",
+        "Ile podstron ma zawierać strona?",
+        "Czy posiadasz logo?",
+        "Czy potrzebujesz formularza kontaktowego?",
+        "Czy chcesz umieścić mapę Google?",
+        "Czy strona ma być wielojęzyczna?"
+      ],
+      prywatny: [
+        "Czym się zajmujesz?",
+        "Jakie informacje chcesz zawrzeć na stronie?",
+        "Czy masz przygotowane zdjęcia lub logo?",
+        "Czy potrzebujesz formularza kontaktowego?",
+        "Czy chcesz dodać mapę lokalizacji (np. miejsce spotkań)?",
+        "Czy strona ma być wielojęzyczna?"
+      ]
+    },
+    landing: {
+      firma: [
+        "Jaki jest główny cel strony?",
+        "Czy masz treści i grafikę?",
+        "Czy ma być podpięta pod kampanię reklamową?",
+        "Czy chcesz formularz zapisu?",
+        "Czy planujesz testy A/B?",
+        "Jakie dane chcesz zbierać?"
+      ],
+      prywatny: [
+        "Jaki cel ma mieć ta strona?",
+        "Czy masz już przygotowane treści i zdjęcia?",
+        "Czy strona ma promować konkretny produkt/usługę?",
+        "Czy chcesz dodać formularz kontaktowy lub zapisowy?",
+        "Czy chcesz mierzyć skuteczność strony?",
+        "Jakie dane chcesz zbierać?"
+      ]
+    },
+    sklep: {
+      firma: [
+        "Ile produktów zamierzasz sprzedawać na początek?",
+        "Jakie metody płatności chcesz obsługiwać?",
+        "Czy masz preferencje co do systemu (np. WooCommerce, Shopify)?",
+        "Czy potrzebujesz integracji z firmą kurierską?",
+        "Czy zamierzasz oferować promocje/kody rabatowe?",
+        "Czy planujesz funkcję konta użytkownika?",
+        "Jakie warianty produktów (rozmiary, kolory) chcesz umożliwić?"
+      ],
+      prywatny: [
+        "Co chcesz sprzedawać w sklepie?",
+        "Ile produktów planujesz na start?",
+        "Czy masz preferencje co do platformy sklepowej?",
+        "Czy potrzebujesz obsługi płatności online?",
+        "Czy chcesz samodzielnie zarządzać produktami?",
+        "Czy planujesz oferować zniżki lub kody promocyjne?"
+      ]
+    },
+    blog: {
+      firma: [
+        "Jaka będzie tematyka bloga?",
+        "Czy chcesz mieć możliwość samodzielnego dodawania wpisów?",
+        "Czy wpisy mają mieć komentarze?",
+        "Czy blog ma być zintegrowany z social mediami?",
+        "Czy zależy Ci na możliwości newslettera?",
+        "Czy chcesz kategoriować i tagować wpisy?"
+      ],
+      prywatny: [
+        "O czym chcesz pisać na blogu?",
+        "Czy chcesz sam dodawać wpisy?",
+        "Czy chcesz umożliwić komentowanie?",
+        "Czy blog ma być połączony z Twoimi mediami społecznościowymi?",
+        "Czy chcesz mieć możliwość wysyłania newslettera?",
+        "Czy chcesz mieć kategorie i tagi?"
+      ]
+    },
+    portfolio: {
+      firma: [
+        "Jakie typy projektów chcesz zaprezentować?",
+        "Ile projektów chcesz pokazać na starcie?",
+        "Czy każdy projekt ma mieć swoją podstronę/opis?",
+        "Czy chcesz dodać sekcję z opiniami klientów?",
+        "Czy planujesz formularz kontaktowy?",
+        "Czy portfolio ma być interaktywne (np. filmy, animacje)?"
+      ],
+      prywatny: [
+        "Jakiego typu prace chcesz pokazać (np. grafika, fotografia)?",
+        "Ile projektów planujesz na początek?",
+        "Czy chcesz dodać osobne strony dla każdego projektu?",
+        "Czy chcesz sekcję z opiniami lub recenzjami?",
+        "Czy chcesz dodać formularz kontaktowy?",
+        "Czy chcesz pokazać interaktywne treści (np. wideo)?"
+      ]
+    },
+    rezerwacja: {
+      firma: [
+        "Co użytkownik będzie rezerwował (np. terminy, produkty, sale)?",
+        "Czy rezerwacje mają być płatne online?",
+        "Czy chcesz ustalać dostępność w kalendarzu?",
+        "Czy system ma wysyłać przypomnienia (mail/SMS)?",
+        "Czy użytkownik ma mieć możliwość rejestracji/logowania?",
+        "Czy potrzebujesz raportów/statystyk?"
+      ],
+      prywatny: [
+        "Co chcesz umożliwić do rezerwacji (np. spotkania, usługi)?",
+        "Czy chcesz przyjmować płatności online?",
+        "Czy potrzebujesz kalendarza z dostępnością?",
+        "Czy chcesz automatyczne przypomnienia?",
+        "Czy użytkownicy mają się logować?",
+        "Czy chcesz przeglądać statystyki rezerwacji?"
+      ]
+    },
+    ogloszeniowy: {
+      firma: [
+        "Jakiego typu ogłoszenia będą dodawane (np. nieruchomości, usługi)?",
+        "Czy dodawanie ogłoszeń ma być darmowe, płatne, czy mieszane?",
+        "Czy chcesz weryfikować ogłoszenia przed publikacją?",
+        "Jakie dane mają być widoczne w ogłoszeniu?",
+        "Czy użytkownik ma mieć możliwość edycji/usuwania ogłoszeń?",
+        "Czy będą różne kategorie i filtry wyszukiwania?"
+      ],
+      prywatny: [
+        "Jakiego rodzaju ogłoszenia chcesz umożliwić?",
+        "Czy dodawanie ogłoszeń ma być darmowe czy płatne?",
+        "Czy ogłoszenia mają być publikowane od razu?",
+        "Jakie informacje będą widoczne w ogłoszeniu?",
+        "Czy użytkownicy mają móc edytować swoje ogłoszenia?",
+        "Czy chcesz kategorie i filtry wyszukiwania?"
+      ]
+    },
+    spolecznosciowy: {
+      firma: [
+        "Jakie funkcje społecznościowe mają być dostępne (np. profile, wiadomości, znajomi)?",
+        "Czy użytkownicy mają publikować posty, zdjęcia, filmy?",
+        "Czy chcesz moderować treści?",
+        "Jakie dane mają być zbierane przy rejestracji?",
+        "Czy będą grupy/fora tematyczne?",
+        "Jakie funkcje powiadomień mają być dostępne?"
+      ],
+      prywatny: [
+        "Jakie funkcje społecznościowe chcesz udostępnić?",
+        "Czy użytkownicy będą mogli dodawać treści?",
+        "Czy chcesz mieć możliwość moderowania?",
+        "Jakie dane mają być zbierane przy rejestracji?",
+        "Czy chcesz tworzyć grupy lub fora?",
+        "Jakie powiadomienia chcesz wdrożyć?"
+      ]
+    },
+    edukacyjna: {
+      firma: [
+        "Jaki jest przedział wiekowy użytkowników?",
+        "Czy będą dostępne gry, quizy lub testy?",
+        "Czy strona będzie zawierać wideo/audio?",
+        "Czy użytkownicy mają mieć konta/logowanie?",
+        "Czy chcesz śledzić postępy użytkownika?",
+        "Czy materiały mają być dostępne za opłatą?"
+      ],
+      prywatny: [
+        "Dla jakiego wieku mają być treści edukacyjne?",
+        "Czy chcesz dodać gry lub quizy?",
+        "Czy chcesz użyć wideo lub audio?",
+        "Czy użytkownicy mają się logować?",
+        "Czy chcesz śledzić postępy użytkownika?",
+        "Czy dostęp ma być płatny?"
+      ]
+    },
+    intranet: {
+      firma: [
+        "Jakie funkcje mają być dostępne (np. dokumenty, ogłoszenia, czat)?",
+        "Ilu użytkowników będzie korzystać ze strony?",
+        "Czy potrzebna jest integracja z systemami firmy (np. ERP, CRM)?",
+        "Jakie poziomy dostępu mają mieć użytkownicy?",
+        "Czy chcesz mieć kalendarz wydarzeń lub rezerwacji sal?",
+        "Czy potrzebne jest logowanie SSO (np. z kontem Google/Microsoft)?"
+      ],
+      prywatny: [
+        "Do jakich celów chcesz używać intranetu?",
+        "Ilu użytkowników będzie korzystać?",
+        "Czy potrzebujesz integracji z innymi narzędziami?",
+        "Czy chcesz ustalać różne poziomy dostępu?",
+        "Czy przyda się kalendarz lub rezerwacja?",
+        "Czy chcesz uproszczone logowanie (np. Google)?"
+      ]
+    },
+    aplikacja: {
+      firma: [
+        "Jaki problem ma rozwiązywać aplikacja?",
+        "Czy użytkownicy mają mieć konta?",
+        "Jakie funkcje ma zawierać aplikacja?",
+        "Czy chcesz MVP czy pełną wersję od razu?",
+        "Jakie technologie preferujesz (jeśli masz wymagania)?",
+        "Czy aplikacja ma być skalowalna na przyszłość?"
+      ],
+      prywatny: [
+        "Do czego chcesz używać tej aplikacji?",
+        "Czy aplikacja ma mieć logowanie?",
+        "Jakie funkcje są dla Ciebie najważniejsze?",
+        "Czy wystarczy wersja podstawowa (MVP)?",
+        "Czy masz jakieś wymagania technologiczne?",
+        "Czy planujesz rozwijać aplikację w przyszłości?"
+      ]
+    }
+  };
+  
+
+  function showStep(n) {
+    steps.forEach((s, i) => s.classList.toggle('active', i === n));
+    currentStep = n;
+
+    prevBtn.style.display = (n === 0) ? 'none' : 'inline-block';
+
+    if (n < 3) {
+      // Krok 0,1,2 - standardowy flow
+      nextBtn.style.display = 'inline-block';
+      finishBtn.style.display = 'none';
+      dynamicContainer.innerHTML = '';
+    } else if (n === 3) {
+      // Krok 3 - dynamiczne pytania
+      nextBtn.style.display = (currentQuestionIndex < currentQuestions.length - 1) ? 'inline-block' : 'none';
+      finishBtn.style.display = (currentQuestionIndex === currentQuestions.length - 1) ? 'inline-block' : 'none';
+    } else if (n === 4) {
+      // Podsumowanie (ukryj wszystkie przyciski)
+      nextBtn.style.display = 'none';
+      prevBtn.style.display = 'none';
+      finishBtn.style.display = 'none';
+    }
+
+    updateProgressDots();
+  }
+
+  function updateProgressDots() {
+    if (currentStep < 3) {
+      progressDots.textContent = `Strona ${currentStep + 1} z 3`;
+    } else if (currentStep === 3) {
+      progressDots.textContent = `Pytanie ${currentQuestionIndex + 1} z ${currentQuestions.length}`;
+    } else {
+      progressDots.textContent = '';
+    }
+  }
+
+  function validateStep() {
+    if (currentStep === 0) {
+      return !!document.getElementById('klient').value || alert("Wybierz typ klienta");
+    }
+    if (currentStep === 1) {
+      return !!document.getElementById('strona').value || alert("Wybierz rodzaj strony");
+    }
+    if (currentStep === 2) {
+      const em = document.getElementById('email');
+      const ok = em.value.trim() && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value);
+      return ok || alert("Podaj poprawny e-mail");
+    }
+    if (currentStep === 3) {
+      const inp = document.getElementById('dynamicAnswer');
+      return !!(inp && inp.value.trim()) || alert("Odpowiedz na pytanie");
+    }
+    return true;
+  }
+
+  function generateDynamicQuestion(idx) {
+    dynamicContainer.innerHTML = '';
+    if (idx < currentQuestions.length) {
+      const q = currentQuestions[idx];
+      const label = document.createElement('label');
+      label.textContent = q;
+      label.htmlFor = 'dynamicAnswer';
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.id = 'dynamicAnswer';
+      input.name = 'dynamicAnswer';
+      input.required = true;
+      input.placeholder = 'Twoja odpowiedź...';
+      if (answers.dynamicAnswers[q]) input.value = answers.dynamicAnswers[q];
+      dynamicContainer.append(label, input);
+    }
+    updateProgressDots();
+  }
+
+  nextBtn.addEventListener('click', () => {
+    if (!validateStep()) return;
+
+    if (currentStep === 0) {
+      answers.clientType = document.getElementById('klient').value;
+      showStep(1);
+    } else if (currentStep === 1) {
+      answers.siteType = document.getElementById('strona').value;
+      // Załaduj pytania dynamiczne po wybraniu klienta i rodzaju strony
+      currentQuestions = questionsByType[answers.siteType]?.[answers.clientType] || [];
+      currentQuestionIndex = 0;
+      showStep(2);
+    } else if (currentStep === 2) {
+      answers.email = document.getElementById('email').value.trim();
+      if (currentQuestions.length > 0) {
+        showStep(3);
+        generateDynamicQuestion(currentQuestionIndex);
+      } else {
+        // brak pytań dynamicznych, przejdź do podsumowania
+        showSummary();
+      }
+    } else if (currentStep === 3) {
+      // Zapisz odpowiedź bieżącego pytania
+      const q = currentQuestions[currentQuestionIndex];
+      const ans = document.getElementById('dynamicAnswer').value.trim();
+      answers.dynamicAnswers[q] = ans;
+
+      currentQuestionIndex++;
+      if (currentQuestionIndex < currentQuestions.length) {
+        generateDynamicQuestion(currentQuestionIndex);
+        showStep(3);
+      } else {
+        // skończyły się pytania dynamiczne - pokaż finish button
+        showStep(3); // przeładuj stan przycisków
+      }
+    }
+  });
+
+  prevBtn.addEventListener('click', () => {
+    if (currentStep === 3) {
+      if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
+        generateDynamicQuestion(currentQuestionIndex);
+        showStep(3);
+      } else {
+        showStep(2);
+      }
+    } else if (currentStep > 0) {
+      showStep(currentStep - 1);
+    }
+  });
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    // Nie wysyłamy tutaj, tylko na finishBtn
+  });
+
+ finishBtn.addEventListener('click', () => {
+  if (!validateStep()) return;
+
+  // Zawsze zapisuj ostatnią odpowiedź jeśli jest input i wartość
+  const inp = document.getElementById('dynamicAnswer');
+  if (inp) {
+    const q = currentQuestions[currentQuestionIndex] || currentQuestions[currentQuestionIndex - 1];
+    if (q) {
+      answers.dynamicAnswers[q] = inp.value.trim();
+    }
+  }
+
+  sendEmail();
+});
+
+
+ function sendEmail() {
+  finishBtn.disabled = true;  // zablokuj przycisk na czas wysyłki
+  const emailParams = {
+    klient: answers.clientType,
+    strona: answers.siteType,
+    email: answers.email,
+    odpowiedzi: Object.entries(answers.dynamicAnswers)
+      .map(([pytanie, odp]) => `${pytanie}: ${odp}`)
+      .join('\n'),
+  };
+
+  emailjs.send('service_rvaizhs', 'template_v2a9jwl', emailParams)
+    .then(() => {
+      alert('Wiadomość wysłana poprawnie!');
+      showSummary();
+    })
+    .catch((error) => {
+      alert('Błąd podczas wysyłki: ' + error.text);
+      finishBtn.disabled = false;  // odblokuj przycisk jeśli błąd
+    });
+}
+
+  function showSummary() {
+    form.style.display = 'none';
+    summaryList.innerHTML = `
+      <li><strong>Klient:</strong> ${answers.clientType}</li>
+      <li><strong>Rodzaj strony:</strong> ${answers.siteType}</li>
+      <li><strong>Email:</strong> ${answers.email}</li>
+    `;
+    for (const [q, a] of Object.entries(answers.dynamicAnswers)) {
+      summaryList.innerHTML += `<li><strong>${q}</strong>: ${a}</li>`;
+    }
+    summaryScreen.classList.remove('hidden');
+    showStep(4); // krok podsumowania
+  }
+
+  restartBtn.addEventListener('click', () => {
+    location.reload();
+  });
+
+  // Inicjalizacja EmailJS
+  emailjs.init("FhX2ZzMieosl6KscW");
+
+  // Startujemy od pierwszego kroku
+  showStep(0);
+</script>
+
+</body>
 </html>
