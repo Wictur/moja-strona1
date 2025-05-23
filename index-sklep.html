@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mój Sklep</title>
+  
+  <!-- Font Awesome CDN -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
+  <style>
+    /* --- ORYGINALNY CSS --- */
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #eee;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      height: 180px;
+      background: linear-gradient(to bottom, #1c1f26, #2e3440);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+      flex-shrink: 0;
+    }
+
+    h1 {
+      font-size: 4rem;
+      margin: 0;
+      font-family: 'Courier New', Courier, monospace;
+      color: #39ff14;
+      text-shadow: 0 0 10px #39ff14;
+    }
+
+        .carousel {
+      width: 100%;
+      overflow: hidden;
+      background-color: #121821;
+      padding: 30px 0;
+      box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.9);
+      border-top: 2px solid #39ff14;
+      border-bottom: 2px solid #39ff14;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .carousel-track {
+      display: flex;
+      animation: scroll-left 30s linear infinite;
+      font-size: 24px;
+      font-weight: 700;
+      color: #39ff14;
+      text-shadow:
+        0 0 5px #39ff14,
+        0 0 10px #39ff14,
+        0 0 20px #39ff14;
+      user-select: none;
+    }
+
+    .carousel-item {
+      flex: 0 0 auto;
+      margin: 0 40px;
+      padding: 10px 20px;
+      border: 2px solid #39ff14;
+      border-radius: 15px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      cursor: default;
+      white-space: nowrap;
+    }
+
+    .carousel-item:hover {
+      background-color: #39ff14;
+      color: #121821;
+      box-shadow: 0 0 15px #39ff14;
+    }
+
+    @keyframes scroll-left {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(calc(-50%));
+      }
+    }
+
+    .cards-container {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      padding: 60px 20px;
+      flex-wrap: nowrap;
+      max-width: 1200px;
+      margin: 0 auto;
+      flex-shrink: 0;
+    }
+    .card {
+      background: linear-gradient(135deg, #1e2430, #2f3a54);
+      border-radius: 20px;
+      padding: 30px;
+      width: 350px;
+      height: 360px;
+      font-size: 20px;
+      box-shadow: 0 8px 30px rgba(57, 255, 20, 0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      color: #ccc;
+      position: relative;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 40px rgba(57, 255, 20, 0.8);
+      color: #39ff14;
+    }
+
+    .card h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 26px;
+      color: #39ff14;
+      flex-shrink: 0;
+      text-shadow: 0 0 5px #39ff14;
+    }
+
+    .card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      flex-grow: 1;
+      overflow-y: auto;
+    }
+
+    .card ul li {
+      margin: 14px 0;
+    }
+
+    .card ul li a {
+      text-decoration: none;
+      color: #a0ff9f;
+      transition: color 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 600;
+      font-size: 18px;
+      white-space: nowrap;
+    }
+
+    .card ul li a:hover {
+      color: #39ff14;
+    }
+
+    .card ul li a i {
+      font-size: 24px;
+      transition: transform 0.3s ease;
+    }
+
+    .card ul li a:hover i {
+      transform: scale(1.2);
+    }
+
+    .card:nth-child(1) ul li:nth-child(1) a i { color: #ff4d6d; }
+    .card:nth-child(1) ul li:nth-child(2) a i { color: #4db8ff; }
+    .card:nth-child(1) ul li:nth-child(3) a i { color: #ffd24d; }
+    .card:nth-child(1) ul li:nth-child(4) a i { color: #6cff6c; }
+    .card:nth-child(1) ul li:nth-child(5) a i { color: #ff944d; }
+    .card:nth-child(1) ul li:nth-child(6) a i { color: #9e5eff; }
+    .card:nth-child(1) ul li:nth-child(7) a i { color: #ff4d4d; }
+
+    footer {
+      background: linear-gradient(to top, #1c1f26, #2e3440);
+      color: #39ff14;
+      text-align: center;
+      padding: 20px 10px;
+      font-size: 18px;
+      box-shadow: 0 -4px 15px rgba(0,0,0,0.6);
+      flex-shrink: 0;
+      margin-top: auto;
+    }
+
+    /* --- DODATKOWE STYLE DO LOGOWANIA I KOSZYKA --- */
+    .user-info {
+      position: fixed;
+      top: 10px;
+      right: 20px;
+      color: #39ff14;
+      font-weight: 700;
+      font-size: 16px;
+      z-index: 1000;
+      cursor: pointer;
+    }
+
+    .btn-logout {
+      margin-left: 10px;
+      color: #ff4d4d;
+      cursor: pointer;
+      font-weight: 700;
+      border: none;
+      background: none;
+      font-size: 16px;
+    }
+
+    /* Modal overlay */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.7);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: #203a43;
+      padding: 30px;
+      border-radius: 15px;
+      width: 320px;
+      color: #eee;
+      box-shadow: 0 0 20px #39ff14;
+      position: relative;
+    }
+
+    .modal-content h2 {
+      margin-top: 0;
+      text-align: center;
+      color: #39ff14;
+      text-shadow: 0 0 10px #39ff14;
+    }
+
+    .modal-content label {
+      display: block;
+      margin: 12px 0 6px;
+      font-weight: 600;
+    }
+
+    .modal-content input[type="text"],
+    .modal-content input[type="password"],
+    .modal-content input[type="email"] {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      font-size: 16px;
+      box-sizing: border-box;
+      margin-bottom: 12px;
+    }
+
+    .modal-content button {
+      width: 100%;
+      padding: 12px;
+      background: #39ff14;
+      border: none;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 16px;
+      cursor: pointer;
+      color: #121821;
+      transition: background 0.3s ease;
+    }
+
+    .modal-content button:hover {
+      background: #2ece0f;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 24px;
+      color: #39ff14;
+      cursor: pointer;
+      font-weight: 700;
+      user-select: none;
+    }
+
+    .error-message {
+      color: #ff4d4d;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    /* Dodaj do kart "Dodaj do koszyka" */
+    .add-to-cart-btn {
+      margin-top: 15px;
+      padding: 10px 15px;
+      background-color: #39ff14;
+      border: none;
+      border-radius: 10px;
+      font-weight: 700;
+      color: #121821;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      width: 100%;
+      font-size: 16px;
+    }
+    .add-to-cart-btn:hover {
+      background-color: #2ece0f;
+    }
+
+    /* Koszyk na dole */
+    #cart {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      max-height: 200px;
+      background: #121821;
+      border-top: 3px solid #39ff14;
+      color: #39ff14;
+      overflow-y: auto;
+      padding: 15px 30px;
+      font-size: 16px;
+      display: none;
+      z-index: 1500;
+      box-shadow: 0 -5px 15px rgba(57, 255, 20, 0.6);
+    }
+
+    #cart h3 {
+      margin: 0 0 10px 0;
+      font-size: 20px;
+      text-shadow: 0 0 5px #39ff14;
+    }
+
+    #cart ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      max-height: 130px;
+      overflow-y: auto;
+    }
+
+    #cart ul li {
+      margin: 6px 0;
+    }
+
+    /* Link do logowania/rejestracji */
+    #login-btn {
+      position: fixed;
+      top: 10px;
+      right: 20px;
+      background: #39ff14;
+      border: none;
+      border-radius: 10px;
+      padding: 8px 16px;
+      font-weight: 700;
+      color: #121821;
+      cursor: pointer;
+      z-index: 1000;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>SKLEP DROPSHIPPINGOWY</h1>
+  </header>
+
+  <button id="login-btn">Zaloguj / Zarejestruj</button>
+  <div class="user-info" style="display:none;">
+    Witaj, <span id="username-display"></span>!
+    <button class="btn-logout" id="logout-btn">Wyloguj</button>
+  </div>
+
+  <!-- KARUZELA Z NAPISAMI -->
+  <div class="carousel">
+    <div class="carousel-track">
+      <div class="carousel-item">Produkt 1</div>
+      <div class="carousel-item">Produkt 2</div>
+      <div class="carousel-item">Produkt 3</div>
+      <div class="carousel-item">Produkt 4</div>
+      <div class="carousel-item">Produkt 5</div>
+      <div class="carousel-item">Produkt 6</div>
+      <div class="carousel-item">Produkt 7</div>
+
+      <div class="carousel-item">Produkt 1</div>
+      <div class="carousel-item">Produkt 2</div>
+      <div class="carousel-item">Produkt 3</div>
+      <div class="carousel-item">Produkt 4</div>
+      <div class="carousel-item">Produkt 5</div>
+      <div class="carousel-item">Produkt 6</div>
+      <div class="carousel-item">Produkt 7</div>
+    </div>
+  </div>
+
+  <!-- KARTY -->
+  <section class="cards-container" id="products-list">
+    <div class="card" data-product="Ubrania / Buty">
+      <h2>Oferta</h2>
+      <ul>
+        <li><a href="#"><i class="fas fa-tshirt"></i> Ubrania / Buty</a></li>
+        <li><a href="#"><i class="fas fa-blender-phone"></i> AGD / Telefony</a></li>
+        <li><a href="#"><i class="fas fa-clock"></i> Zegarki</a></li>
+        <li><a href="#"><i class="fas fa-plug"></i> Elektronika</a></li>
+        <li><a href="#"><i class="fas fa-home"></i> Dom i ogród</a></li>
+        <li><a href="#"><i class="fas fa-dumbbell"></i> Sport</a></li>
+        <li><a href="#"><i class="fas fa-heartbeat"></i> Zdrowie i uroda</a></li>
+      </ul>
+    </div>
+
+    <div class="card" data-product="Promocje">
+      <h2>Promocje</h2>
+      <ul>
+        <li><a href="#"><i class="fas fa-fire"></i> Nowe promocje</a></li>
+        <li><a href="#"><i class="fas fa-calendar-week"></i> Tylko w tym tygodniu</a></li>
+        <li><a href="#"><i class="fas fa-star"></i> Bestsellery</a></li>
+      </ul>
+    </div>
+
+    <div class="card" data-product="Kontakt">
+      <h2>Kontakt</h2>
+      <ul>
+        <li><a href="#"><i class="fas fa-envelope"></i> Email: kontakt.bitnestic@gmail.com</a></li>
+        <li><a href="#"><i class="fas fa-phone"></i> Telefon: +48 123 456 789</a></li>
+        <li><a href="#"><i class="fab fa-instagram"></i> Instagram: bitnestic.web</a></li>
+        <li><a href="#"><i class="fab fa-facebook"></i> Facebook: xxxxxxxxxxxxx</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- KOSZYK -->
+  <div id="cart">
+    <h3>Twój koszyk:</h3>
+    <ul id="cart-items"></ul>
+  </div>
+
+  <!-- MODAL LOGOWANIA / REJESTRACJI -->
+  <div class="modal" id="auth-modal">
+    <div class="modal-content">
+      <span class="modal-close" id="close-modal">&times;</span>
+
+      <h2 id="modal-title">Zaloguj się</h2>
+
+      <div id="error-message" class="error-message"></div>
+
+      <form id="auth-form">
+        <label for="username">Nazwa użytkownika:</label>
+        <input type="text" id="username" name="username" required />
+
+        <label for="email" id="email-label" style="display:none;">Email:</label>
+        <input type="email" id="email" name="email" style="display:none;" />
+
+        <label for="password">Hasło:</label>
+        <input type="password" id="password" name="password" required />
+
+        <button type="submit" id="auth-submit">Zaloguj</button>
+      </form>
+
+      <p style="text-align:center; margin-top: 15px;">
+        <span id="toggle-auth" style="cursor:pointer; color:#39ff14; font-weight:700;">
+          Nie masz konta? Zarejestruj się
+        </span>
+      </p>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 SKLEP DROPSHIPPINGOWY — Wszelkie prawa zastrzeżone.
+  </footer>
+
+  <script>
+    // --- Logika logowania/rejestracji i koszyka ---
+
+    const loginBtn = document.getElementById('login-btn');
+    const userInfo = document.querySelector('.user-info');
+    const usernameDisplay = document.getElementById('username-display');
+    const logoutBtn = document.getElementById('logout-btn');
+
+    const authModal = document.getElementById('auth-modal');
+const closeModalBtn = document.getElementById('close-modal');
+const modalTitle = document.getElementById('modal-title');
+const authForm = document.getElementById('auth-form');
+const authSubmitBtn = document.getElementById('auth-submit');
+const toggleAuth = document.getElementById('toggle-auth');
+const errorMessage = document.getElementById('error-message');
+
+const emailLabel = document.getElementById('email-label');
+const emailInput = document.getElementById('email');
+
+let isLoginMode = true;
+
+// Prosty "baza" użytkowników w localStorage (do testów)
+// Przechowujemy: username, email, password (w rzeczywistości trzeba hashować)
+const USERS_KEY = 'sklep_users';
+const LOGGED_IN_KEY = 'sklep_logged_in_user';
+
+function getUsers() {
+  return JSON.parse(localStorage.getItem(USERS_KEY)) || [];
+}
+
+function saveUsers(users) {
+  localStorage.setItem(USERS_KEY, JSON.stringify(users));
+}
+
+function getLoggedInUser() {
+  return JSON.parse(localStorage.getItem(LOGGED_IN_KEY));
+}
+
+function setLoggedInUser(user) {
+  localStorage.setItem(LOGGED_IN_KEY, JSON.stringify(user));
+}
+
+function clearLoggedInUser() {
+  localStorage.removeItem(LOGGED_IN_KEY);
+}
+
+// --- Render UI po zalogowaniu ---
+function updateUI() {
+  const user = getLoggedInUser();
+  if(user) {
+    loginBtn.style.display = 'none';
+    userInfo.style.display = 'block';
+    usernameDisplay.textContent = user.username;
+    showCart();
+  } else {
+    loginBtn.style.display = 'block';
+    userInfo.style.display = 'none';
+    hideCart();
+  }
+}
+
+// --- Modal ---
+loginBtn.addEventListener('click', () => {
+  openModal();
+});
+
+closeModalBtn.addEventListener('click', () => {
+  closeModal();
+});
+
+// Kliknięcie poza modal zamyka modal
+window.addEventListener('click', (e) => {
+  if(e.target === authModal) {
+    closeModal();
+  }
+});
+
+// Przełączanie między logowaniem i rejestracją
+toggleAuth.addEventListener('click', () => {
+  isLoginMode = !isLoginMode;
+  if(isLoginMode) {
+    modalTitle.textContent = 'Zaloguj się';
+    authSubmitBtn.textContent = 'Zaloguj';
+    toggleAuth.textContent = 'Nie masz konta? Zarejestruj się';
+    emailLabel.style.display = 'none';
+    emailInput.style.display = 'none';
+    emailInput.required = false;
+  } else {
+    modalTitle.textContent = 'Zarejestruj się';
+    authSubmitBtn.textContent = 'Zarejestruj';
+    toggleAuth.textContent = 'Masz już konto? Zaloguj się';
+    emailLabel.style.display = 'block';
+    emailInput.style.display = 'block';
+    emailInput.required = true;
+  }
+  errorMessage.textContent = '';
+  authForm.reset();
+});
+
+// Obsługa formularza logowania/rejestracji
+authForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  errorMessage.textContent = '';
+  const username = authForm.username.value.trim();
+  const password = authForm.password.value;
+  const email = authForm.email.value.trim();
+
+  if(isLoginMode) {
+    // Logowanie
+    const users = getUsers();
+    const foundUser = users.find(u => u.username === username && u.password === password);
+    if(foundUser) {
+      setLoggedInUser({ username: foundUser.username, email: foundUser.email });
+      updateUI();
+      closeModal();
+    } else {
+      errorMessage.textContent = 'Nieprawidłowa nazwa użytkownika lub hasło.';
+    }
+  } else {
+    // Rejestracja
+    const users = getUsers();
+    if(users.find(u => u.username === username)) {
+      errorMessage.textContent = 'Ta nazwa użytkownika jest już zajęta.';
+      return;
+    }
+    if(users.find(u => u.email === email)) {
+      errorMessage.textContent = 'Ten adres email jest już zarejestrowany.';
+      return;
+    }
+    // Dodaj nowego użytkownika
+    users.push({ username, email, password });
+    saveUsers(users);
+    setLoggedInUser({ username, email });
+    updateUI();
+    closeModal();
+  }
+});
+
+logoutBtn.addEventListener('click', () => {
+  clearLoggedInUser();
+  updateUI();
+});
+
+function openModal() {
+  authModal.classList.add('active');
+  isLoginMode = true;
+  modalTitle.textContent = 'Zaloguj się';
+  authSubmitBtn.textContent = 'Zaloguj';
+  toggleAuth.textContent = 'Nie masz konta? Zarejestruj się';
+  emailLabel.style.display = 'none';
+  emailInput.style.display = 'none';
+  emailInput.required = false;
+  errorMessage.textContent = '';
+  authForm.reset();
+}
+
+function closeModal() {
+  authModal.classList.remove('active');
+}
+
+// --- KOSZYK ---
+const cart = [];
+const cartElement = document.getElementById('cart');
+const cartItemsElement = document.getElementById('cart-items');
+
+function showCart() {
+  cartElement.style.display = 'block';
+  renderCart();
+}
+
+function hideCart() {
+  cartElement.style.display = 'none';
+}
+
+function renderCart() {
+  cartItemsElement.innerHTML = '';
+  if(cart.length === 0) {
+    cartItemsElement.innerHTML = '<li>Twój koszyk jest pusty.</li>';
+    return;
+  }
+  cart.forEach((item, idx) => {
+    const li = document.createElement('li');
+    li.textContent = item;
+    cartItemsElement.appendChild(li);
+  });
+}
+
+// Dodajemy obsługę przycisków "Dodaj do koszyka"
+document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+  button.addEventListener('click', () => {
+    const user = getLoggedInUser();
+    if(!user) {
+      alert('Musisz być zalogowany, aby dodawać produkty do koszyka.');
+      openModal();
+      return;
+    }
+    const card = button.closest('.card');
+    const productName = card.getAttribute('data-product') || 'Produkt';
+    cart.push(productName);
+    alert(`Dodano "${productName}" do koszyka.`);
+    showCart();
+  });
+});
+
+// Inicjalizacja
+updateUI();
+</script>
+ </body>
+  </html>
