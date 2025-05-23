@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nowoczesne Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+:root {
+  --primary: #7c3aed;
+  --primary-dark: #4c1d95;
+  --text-light: #e5e7eb;
+  --text-muted: #9ca3af;
+  --bg-dark: linear-gradient(135deg, #1e1b4b, #111827);
+  --card-glass: rgba(255, 255, 255, 0.05);
+  --card-border: rgba(255, 255, 255, 0.15);
+  --glow: 0 0 20px rgba(124, 58, 237, 0.4);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg-dark);
+  color: var(--text-light);
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  height: 100%;
+}
+
+header {
+  text-align: center;
+  padding: 2rem 1rem;
+  animation: fadeSlideDown 0.7s ease-out both;
+}
+
+header h1 {
+  font-size: 2.6rem;
+  font-weight: 800;
+  background: linear-gradient(to right, #8b5cf6, #4f46e5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem;
+}
+
+main {
+  flex: 1;
+}
+
+header p {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+}
+
+.portfolio-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4rem;
+  padding: 2rem;
+  max-width: 1900px;
+  margin: 0 auto;
+  animation: fadeIn 1s ease-in both;
+}
+
+.card {
+  background: var(--card-glass);
+  border: 1px solid var(--card-border);
+  border-radius: 1.25rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3), var(--glow);
+  backdrop-filter: blur(12px);
+  padding: 1.5rem;
+  width: 300px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(124,58,237,0.15) 0%, transparent 60%);
+  transform: rotate(45deg);
+  z-index: 0;
+}
+
+.card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 60px rgba(124, 58, 237, 0.25), var(--glow);
+}
+
+.card h3,
+.card p,
+.buttons {
+  position: relative;
+  z-index: 1;
+}
+
+.card h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 0.4rem;
+}
+
+/* Nowa klasa dla szarego opisu pod tytułem */
+.card .desc {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+/* Miejsce na zdjęcie */
+.card .image-placeholder {
+  width: 100%;
+  height: 140px;
+  border-radius: 0.75rem;
+  background: #1f2937;
+  border: 1px dashed var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+.image-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0.75rem;
+  display: block;
+}
+
+
+.buttons a {
+  background: linear-gradient(135deg, #7c3aed, #4f46e5);
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  box-shadow: 0 0 0 rgba(0,0,0,0);
+}
+
+.buttons a:hover {
+  transform: scale(1.06);
+  box-shadow: 0 0 15px #7c3aed;
+}
+
+@media (max-width: 768px) {
+  .card {
+    width: 90%;
+    height: auto;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeSlideDown {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+footer {
+  background: linear-gradient(to right, #312e81, #1e1b4b);
+  padding: 2.5rem 1rem;
+  color: #e5e7eb;
+  text-align: center;
+}
+
+#uwaga {
+  color: #f87171;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+footer h3 {
+  color: #d1d5db;
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 1rem;
+  line-height: 1.8;
+  
+}
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🌐 Moje Portfolio</h1>
+    <p>Zobacz moje przykładowe realizacje stron internetowych</p>
+  </header>
+
+  <main>
+    <section class="portfolio-grid">
+
+      <div class="card">
+        <h3>Strona wizytówka</h3>
+        <p class="desc">Minimalistyczna prezentacja Twojej osoby lub firmy – idealna na początek.</p>
+        <div class="image-placeholder">
+           <img src="portfolio/wizytowkowa.zdjece.jpg" alt="Strona wizytowkowa"/>
+
+        </div>
+        <div class="buttons"><a href="portfolio\wizytowkowa\index.html">Zobacz stronę</a></div>
+      </div>
+
+      <div class="card">
+        <h3>Landing Page</h3>
+        <p class="desc">Skoncentrowana na konwersji strona z silnym Call to Action.</p>
+        <div class="image-placeholder"></div>
+        <div class="buttons"><a href="#">Zobacz stronę</a></div>
+      </div>
+
+      <div class="card">
+        <h3>Sklep internetowy</h3>
+        <p class="desc">Pełnoprawny e-commerce z koszykiem, produktami i płatnościami.</p>
+        <div class="image-placeholder">
+          <img src="portfolio/sklep.zdjecie.jpg" alt="Sklep internetowy"/>
+
+        </div>
+        <div class="buttons"><a href="portfolio\sklep\index.html">Zobacz stronę</a></div>
+      </div>
+
+      <div class="card">
+        <h3>Blog</h3>
+        <p class="desc">Nowoczesny blog z wpisami, komentarzami i kategoriami.</p>
+        <div class="image-placeholder"></div>
+        <div class="buttons"><a href="#">Zobacz stronę</a></div>
+      </div>
+
+      <div class="card">
+        <h3>Portfolio</h3>
+        <p class="desc">Zestawienie moich najlepszych projektów frontendowych i aplikacji webowych.</p>
+        <div class="image-placeholder"></div>
+        <div class="buttons"><a href="#">Zobacz stronę</a></div>
+      </div>
+
+    </section>
+  </main>
+
+  <footer>
+    <h1 id="uwaga">UWAGA</h1>
+    <h3>Prezentowane tutaj projekty są przykładowymi realizacjami i nie są dostępne online ani na sprzedaż. Każda strona tworzona jest indywidualnie, dopasowana do Twoich potrzeb i wymagań. Razem osiągniemy najlepszy efekt!</h3>
+  </footer>
+
+</body>
+</html>

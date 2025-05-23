@@ -159,12 +159,6 @@
         <option value="sklep">Sklep internetowy</option>
         <option value="blog">Blog</option>
         <option value="portfolio">Portfolio</option>
-        <option value="rezerwacja">System rezerwacji</option>
-        <option value="ogloszeniowy">Serwis ogłoszeniowy</option>
-        <option value="spolecznosciowy">Portal społecznościowy</option>
-        <option value="edukacyjna">Strona edukacyjna dla dzieci</option>
-        <option value="intranet">Intranet dla firmy</option>
-        <option value="aplikacja">Aplikacja webowa</option>
       </select>
     </div>
     <div class="step" id="step2">
@@ -174,6 +168,23 @@
     <div class="step" id="step3">
       <div id="dynamicQuestionsContainer"></div>
     </div>
+    <div class="step" id="step4">
+  <label>Czy potrzebujesz rejestracji domeny?</label>
+  <select id="domainRegistration" required>
+    <option value="">Wybierz</option>
+    <option value="tak">Tak</option>
+    <option value="nie">Nie</option>
+  </select>
+
+  <label>Czy potrzebujesz hostingu?</label>
+  <select id="hosting" required>
+    <option value="">Wybierz</option>
+    <option value="tak">Tak</option>
+    <option value="nie">Nie</option>
+  </select>
+
+</div>
+
     <div class="buttons">
       <button type="button" id="prevBtn" disabled>Wstecz</button>
       <button type="button" id="nextBtn">Dalej</button>
@@ -300,114 +311,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "Czy chcesz pokazać interaktywne treści (np. wideo)?"
       ]
     },
-    rezerwacja: {
-      firma: [
-        "Co użytkownik będzie rezerwował (np. terminy, produkty, sale)?",
-        "Czy rezerwacje mają być płatne online?",
-        "Czy chcesz ustalać dostępność w kalendarzu?",
-        "Czy system ma wysyłać przypomnienia (mail/SMS)?",
-        "Czy użytkownik ma mieć możliwość rejestracji/logowania?",
-        "Czy potrzebujesz raportów/statystyk?"
-      ],
-      prywatny: [
-        "Co chcesz umożliwić do rezerwacji (np. spotkania, usługi)?",
-        "Czy chcesz przyjmować płatności online?",
-        "Czy potrzebujesz kalendarza z dostępnością?",
-        "Czy chcesz automatyczne przypomnienia?",
-        "Czy użytkownicy mają się logować?",
-        "Czy chcesz przeglądać statystyki rezerwacji?"
-      ]
-    },
-    ogloszeniowy: {
-      firma: [
-        "Jakiego typu ogłoszenia będą dodawane (np. nieruchomości, usługi)?",
-        "Czy dodawanie ogłoszeń ma być darmowe, płatne, czy mieszane?",
-        "Czy chcesz weryfikować ogłoszenia przed publikacją?",
-        "Jakie dane mają być widoczne w ogłoszeniu?",
-        "Czy użytkownik ma mieć możliwość edycji/usuwania ogłoszeń?",
-        "Czy będą różne kategorie i filtry wyszukiwania?"
-      ],
-      prywatny: [
-        "Jakiego rodzaju ogłoszenia chcesz umożliwić?",
-        "Czy dodawanie ogłoszeń ma być darmowe czy płatne?",
-        "Czy ogłoszenia mają być publikowane od razu?",
-        "Jakie informacje będą widoczne w ogłoszeniu?",
-        "Czy użytkownicy mają móc edytować swoje ogłoszenia?",
-        "Czy chcesz kategorie i filtry wyszukiwania?"
-      ]
-    },
-    spolecznosciowy: {
-      firma: [
-        "Jakie funkcje społecznościowe mają być dostępne (np. profile, wiadomości, znajomi)?",
-        "Czy użytkownicy mają publikować posty, zdjęcia, filmy?",
-        "Czy chcesz moderować treści?",
-        "Jakie dane mają być zbierane przy rejestracji?",
-        "Czy będą grupy/fora tematyczne?",
-        "Jakie funkcje powiadomień mają być dostępne?"
-      ],
-      prywatny: [
-        "Jakie funkcje społecznościowe chcesz udostępnić?",
-        "Czy użytkownicy będą mogli dodawać treści?",
-        "Czy chcesz mieć możliwość moderowania?",
-        "Jakie dane mają być zbierane przy rejestracji?",
-        "Czy chcesz tworzyć grupy lub fora?",
-        "Jakie powiadomienia chcesz wdrożyć?"
-      ]
-    },
-    edukacyjna: {
-      firma: [
-        "Jaki jest przedział wiekowy użytkowników?",
-        "Czy będą dostępne gry, quizy lub testy?",
-        "Czy strona będzie zawierać wideo/audio?",
-        "Czy użytkownicy mają mieć konta/logowanie?",
-        "Czy chcesz śledzić postępy użytkownika?",
-        "Czy materiały mają być dostępne za opłatą?"
-      ],
-      prywatny: [
-        "Dla jakiego wieku mają być treści edukacyjne?",
-        "Czy chcesz dodać gry lub quizy?",
-        "Czy chcesz użyć wideo lub audio?",
-        "Czy użytkownicy mają się logować?",
-        "Czy chcesz śledzić postępy użytkownika?",
-        "Czy dostęp ma być płatny?"
-      ]
-    },
-    intranet: {
-      firma: [
-        "Jakie funkcje mają być dostępne (np. dokumenty, ogłoszenia, czat)?",
-        "Ilu użytkowników będzie korzystać ze strony?",
-        "Czy potrzebna jest integracja z systemami firmy (np. ERP, CRM)?",
-        "Jakie poziomy dostępu mają mieć użytkownicy?",
-        "Czy chcesz mieć kalendarz wydarzeń lub rezerwacji sal?",
-        "Czy potrzebne jest logowanie SSO (np. z kontem Google/Microsoft)?"
-      ],
-      prywatny: [
-        "Do jakich celów chcesz używać intranetu?",
-        "Ilu użytkowników będzie korzystać?",
-        "Czy potrzebujesz integracji z innymi narzędziami?",
-        "Czy chcesz ustalać różne poziomy dostępu?",
-        "Czy przyda się kalendarz lub rezerwacja?",
-        "Czy chcesz uproszczone logowanie (np. Google)?"
-      ]
-    },
-    aplikacja: {
-      firma: [
-        "Jaki problem ma rozwiązywać aplikacja?",
-        "Czy użytkownicy mają mieć konta?",
-        "Jakie funkcje ma zawierać aplikacja?",
-        "Czy chcesz MVP czy pełną wersję od razu?",
-        "Jakie technologie preferujesz (jeśli masz wymagania)?",
-        "Czy aplikacja ma być skalowalna na przyszłość?"
-      ],
-      prywatny: [
-        "Do czego chcesz używać tej aplikacji?",
-        "Czy aplikacja ma mieć logowanie?",
-        "Jakie funkcje są dla Ciebie najważniejsze?",
-        "Czy wystarczy wersja podstawowa (MVP)?",
-        "Czy masz jakieś wymagania technologiczne?",
-        "Czy planujesz rozwijać aplikację w przyszłości?"
-      ]
-    }
+
   };
   const siteNames = {
     wizytowka:      'Strona wizytówka',
@@ -415,20 +319,24 @@ document.addEventListener('DOMContentLoaded', () => {
     sklep:          'Sklep internetowy',
     blog:           'Blog',
     portfolio:      'Portfolio',
-    rezerwacja:     'System rezerwacji',
-    ogloszeniowy:   'Serwis ogłoszeniowy',
-    spolecznosciowy:'Portal społecznościowy',
-    edukacyjna:     'Strona edukacyjna',
-    intranet:       'Intranet',
-    aplikacja:      'Aplikacja webowa'
   };
 
-  function showStep(i) {
-    steps.forEach((s, idx) => s.classList.toggle('active', idx === i));
-    updateButtons();
-    renderProgress(i);
-    if (i === 3) renderDynamic();
+function showStep(i) {
+  steps.forEach((s, idx) => s.classList.toggle('active', idx === i));
+  updateButtons();
+  renderProgress(i);
+
+  if (i === 3) {
+    renderDynamic();
+    dynamicContainer.style.display = 'block';
+    questionText.style.display = 'block';
+  } else {
+    // Ukryj pytania i tekst pytania, żeby nie były widoczne np. w kroku 4
+    dynamicContainer.innerHTML = '';
+    dynamicContainer.style.display = 'none';
+    questionText.style.display = 'none';
   }
+}
 
   function renderProgress(i) {
     const dots = Array.from({ length: steps.length }, (_, j) => j === i ? '●' : '○').join(' ');
@@ -454,18 +362,24 @@ function renderDynamic() {
 }
 
 
-  function updateButtons() {
-    if (currentStep === 3 && dynamicQuestions.length) {
-      const isLast = currentQuestionIndex === dynamicQuestions.length - 1;
-      nextBtn.style.display   = isLast ? 'none' : '';
-      finishBtn.style.display = isLast ? '' : 'none';
-      prevBtn.disabled = false;
-    } else {
-      nextBtn.style.display   = '';
-      finishBtn.style.display = 'none';
-      prevBtn.disabled = currentStep === 0;
-    }
+function updateButtons() {
+  if (currentStep === 3 && dynamicQuestions.length) {
+    // Zawsze pokazuj Next na pytaniach dynamicznych (krok 3)
+    nextBtn.style.display = '';
+    finishBtn.style.display = 'none';
+    prevBtn.disabled = false;
+  } else if (currentStep === 4) {
+    // W kroku 4 pokazujemy finish
+    nextBtn.style.display = 'none';
+    finishBtn.style.display = '';
+    prevBtn.disabled = false;
+  } else {
+    nextBtn.style.display = '';
+    finishBtn.style.display = 'none';
+    prevBtn.disabled = currentStep === 0;
   }
+}
+
 
 nextBtn.addEventListener('click', () => {
   if (currentStep === 0) {
@@ -485,25 +399,30 @@ nextBtn.addEventListener('click', () => {
     if (!val.includes('@')) return alert('Podaj poprawny e-mail.');
     answers.email = val;
 
-    // Wczytanie pytań i przejście do pierwszego
     dynamicQuestions = (questionsByType[answers.siteType] || {})[answers.clientType] || [];
     currentQuestionIndex = 0;
   }
 
   if (currentStep === 3) {
-    // Sprawdzenie poprawności odpowiedzi dynamicznej
     const ta = document.getElementById('dynamicAnswer');
     if (!ta || !ta.value.trim()) {
       return alert('Uzupełnij odpowiedź przed przejściem dalej.');
     }
-
     answers[`dyn_${currentQuestionIndex}`] = ta.value.trim();
 
     if (currentQuestionIndex < dynamicQuestions.length - 1) {
       currentQuestionIndex++;
-      renderDynamic(); // ← po tym textarea już istnieje
+      renderDynamic();
       return;
-    }
+    }else {
+    // ostatnie pytanie - przejście do kroku 4
+    currentStep++;
+    showStep(currentStep);
+    return;
+  }
+    // Jeśli jesteśmy na ostatnim pytaniu, nie przechodzimy dalej po next
+    // Czekamy na finishBtn click
+
   }
 
   if (currentStep < steps.length - 1) {
@@ -511,6 +430,7 @@ nextBtn.addEventListener('click', () => {
     showStep(currentStep);
   }
 });
+
 
 
 

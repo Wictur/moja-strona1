@@ -1,163 +1,404 @@
 <!DOCTYPE html>
 <html lang="pl">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nowoczesna Strona</title>
-    <link rel="icon" type="image/png" href="favicon.png" />
-    <script src="https://cdn.tailwindcss.com?v=1.1"></script>
-    <style>
-      .glow {
-        color: white;
-        transition: text-shadow 0.3s ease-in-out;
-      }
-      .glow:hover {
-        text-shadow: 0 0 6px #ffffff, 0 0 10px #6a5bfa, 0 0 15px #6a5bfa;
-      }
-      .button-glow {
-        background: linear-gradient(45deg, #ff8a00, #e52e71);
-        border-radius: 12px;
-        padding: 12px 24px;
-        font-weight: bold;
-        color: white;
-        box-shadow: 0 0 5px #ff8a00, 0 0 10px #e52e71;
-        transition: all 0.3s ease;
-      }
-      .button-glow:hover {
-        transform: scale(1.05);
-        box-shadow: 0 0 15px #e52e71, 0 0 20px #ff8a00;
-      }
-      body {
-        background-color: #1f1f1f;
-        color: #e0e0e0;
-      }
-      h1, h2, p {
-        color: white;
-        text-shadow: none;
-      }
-    </style>
-  </head>
-  <body class="bg-gray-950 text-white font-sans">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Strona Wizytówka</title>
+  <style>
+    /* Reset i podstawy */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+      color: #1e293b;
+      scroll-behavior: smooth;
+    }
 
-    <!-- Hero -->
-    <section class="relative min-h-screen flex flex-col justify-center items-center text-center px-6 bg-gradient-to-br from-blue-700 via-purple-600 to-pink-500 overflow-hidden">
-      <h1 class="text-4xl md:text-6xl font-bold mb-6 glow">Witamy na naszej stronie</h1>
-      <p class="text-lg md:text-xl mb-8 max-w-xl text-white">Nowoczesny design. Szybkość. Niesamowite wrażenia.</p>
-      <a href="#oferta" class="button-glow hover:bg-gray-100 transition mb-10">Zobacz ofertę</a>
-      <div class="flex flex-wrap justify-center gap-6 text-white text-sm md:text-base">
-        <div class="flex items-center gap-2"><span>⚡</span> Szybkie ładowanie</div>
-        <div class="flex items-center gap-2"><span>📱</span> Responsywny design</div>
-        <div class="flex items-center gap-2"><span>🔒</span> Bezpieczeństwo</div>
-        <div class="flex items-center gap-2"><span>💡</span> Indywidualne podejście</div>
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background-color: #2563eb;
+      color: #e0e7ff;
+      font-weight: 700;
+      font-size: 3rem;
+      text-align: center;
+      padding: 2rem 1rem;
+      box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+      user-select: none;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      gap: 24px;
+      padding: 24px;
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+      box-sizing: border-box;
+      align-items: stretch;
+      min-height: 0;
+    }
+
+    /* Lewa kolumna */
+    .left-column {
+      display: flex;
+      flex-direction: column;
+      flex: 3;
+      gap: 24px;
+      height: 100%;
+    }
+
+    .about, .services {
+      background-color: #ffffff;
+      border-radius: 16px;
+      padding: 24px 32px;
+      box-shadow: 0 8px 24px rgba(37, 99, 235, 0.12);
+      overflow-y: auto;
+      color: #1e293b;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .about:hover, .services:hover {
+      box-shadow: 0 12px 32px rgba(37, 99, 235, 0.18);
+    }
+
+    .about h2, .services h2 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #2563eb;
+      border-bottom: 2px solid #93c5fd;
+      padding-bottom: 0.4rem;
+    }
+
+    .about p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: #334155;
+    }
+
+    .services ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .services li {
+      margin: 12px 0;
+      font-weight: 600;
+      font-size: 1.1rem;
+      padding-left: 18px;
+      position: relative;
+      color: #1e293b;
+    }
+    .services li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: #2563eb;
+      font-weight: 700;
+    }
+
+    /* Prawa kolumna - Galeria */
+    .gallery {
+      flex: 2;
+      background-color: #ffffff;
+      border-radius: 16px;
+      padding: 24px 32px;
+      box-shadow: 0 8px 24px rgba(37, 99, 235, 0.12);
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      height: 100%;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .gallery:hover {
+      box-shadow: 0 12px 32px rgba(37, 99, 235, 0.18);
+    }
+
+    .gallery h2 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 2rem;
+      color: #2563eb;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #93c5fd;
+      padding-bottom: 0.4rem;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 20px;
+      flex-grow: 1;
+      overflow-y: auto;
+    }
+
+    .gallery-item {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 6px 18px rgba(37, 99, 235, 0.1);
+      background-color: #f9fafb;
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .gallery-item:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 14px 28px rgba(37, 99, 235, 0.2);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-bottom: 1px solid #e0e7ff;
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+
+    .caption {
+      text-align: center;
+      padding: 12px 8px;
+      font-weight: 700;
+      color: #334155;
+      font-size: 1rem;
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f0f9ff;
+      border-top: 1px solid #e0e7ff;
+    }
+
+    footer {
+      background-color: #2563eb;
+      color: #e0e7ff;
+      text-align: center;
+      padding: 28px 20px;
+      font-weight: 600;
+      box-shadow: 0 -4px 20px rgba(37, 99, 235, 0.3);
+      user-select: none;
+      margin-top: auto;
+    }
+
+    .footer-columns {
+      display: flex;
+      justify-content: center;
+      gap: 80px;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-column {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 160px;
+    }
+
+    .footer-column h2 {
+      font-weight: 700;
+      margin-bottom: 0.5em;
+      letter-spacing: 0.05em;
+    }
+
+    .footer-column p {
+      margin: 0;
+      font-weight: 500;
+      font-size: 1rem;
+    }
+    .testimonials {
+  background-color: #e0efff;
+  border-radius: 16px;
+  padding: 24px 32px;
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.1);
+  color: #1e293b;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex-grow: 1;
+}
+
+.testimonials h2 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #1e40af;
+  border-bottom: 2px solid #93c5fd;
+  padding-bottom: 0.4rem;
+}
+
+.testimonial p {
+  font-style: italic;
+  font-size: 1.1rem;
+  margin: 0 0 0.4rem 0;
+  line-height: 1.5;
+}
+
+.testimonial span {
+  font-weight: 600;
+  color: #2563eb;
+}
+
+.contact-btn {
+  align-self: flex-start;
+  background-color: #2563eb;
+  color: #fff;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 6px 14px rgba(37, 99, 235, 0.4);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-btn:hover {
+  background-color: #1e40af;
+  box-shadow: 0 8px 20px rgba(30, 64, 175, 0.6);
+}
+
+
+    /* Responsywność */
+    @media (max-width: 1024px) {
+      main {
+        flex-direction: column;
+        padding: 16px;
+      }
+      .left-column, .gallery {
+        width: 100%;
+        flex: none;
+        height: auto;
+      }
+      .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 16px;
+      }
+      .gallery-item img {
+        height: 100px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        font-size: 2.2rem;
+        padding: 1.5rem 1rem;
+      }
+      .about, .services, .gallery {
+        padding: 16px 20px;
+      }
+      .gallery-item img {
+        height: 90px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>Moja Firma</header>
+
+  <main>
+    <div class="left-column">
+      <section class="about">
+        <h2>O mnie</h2>
+        <p>Cześć! Nazywam się Jan Kowalski. Zajmuję się tworzeniem stron internetowych i grafiką. Pasjonuję się designem i nowoczesnymi technologiami.</p>
+      </section>
+
+      <section class="services">
+        <h2>Co oferuję</h2>
+        <ul>
+          <li>Projektowanie stron internetowych</li>
+          <li>Identyfikacja wizualna</li>
+          <li>Tworzenie logo i materiałów graficznych</li>
+        </ul>
+      </section>
+    </div>
+    <!-- Dodaj to wewnątrz .left-column, pod sekcją .services -->
+<section class="testimonials">
+  <h2>Co mówią klienci</h2>
+  <div class="testimonial">
+    <p>„Jan stworzył dla nas stronę szybko i profesjonalnie. Polecam!”</p>
+    <span>- Anna Nowak</span>
+  </div>
+  <div class="testimonial">
+    <p>„Doskonały kontakt i świetne pomysły na identyfikację wizualną.”</p>
+    <span>- Marek Wiśniewski</span>
+  </div>
+  <button class="contact-btn" onclick="window.location.href='mailto:jankowalski@gmail.com'">Skontaktuj się</button>
+</section>
+
+
+    <section class="gallery">
+      <h2>Galeria</h2>
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <img src="https://via.placeholder.com/300x200" alt="Projekt 1" />
+          <div class="caption">Projekt 1</div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://via.placeholder.com/300x200" alt="Projekt 2" />
+          <div class="caption">Projekt 2</div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://via.placeholder.com/300x200" alt="Projekt 3" />
+          <div class="caption">Projekt 3</div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://via.placeholder.com/300x200" alt="Projekt 4" />
+          <div class="caption">Projekt 4</div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://via.placeholder.com/300x200" alt="Projekt 5" />
+          <div class="caption">Projekt 5</div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://via.placeholder.com/300x200" alt="Projekt 6" />
+          <div class="caption">Projekt 6</div>
+        </div>
       </div>
-      <div class="absolute bottom-6 animate-bounce text-white text-3xl">↓</div>
-      <svg class="absolute opacity-10 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="10%" cy="20%" r="60" fill="#ffffff22">
-          <animate attributeName="cy" values="20%;30%;20%" dur="6s" repeatCount="indefinite" />
-        </circle>
-        <circle cx="80%" cy="60%" r="40" fill="#ffffff33">
-          <animate attributeName="cy" values="60%;50%;60%" dur="8s" repeatCount="indefinite" />
-        </circle>
-        <circle cx="50%" cy="90%" r="30" fill="#ffffff11">
-          <animate attributeName="cy" values="90%;85%;90%" dur="5s" repeatCount="indefinite" />
-        </circle>
-      </svg>
     </section>
+  </main>
 
-    <!-- Oferta -->
-    <section id="oferta" class="py-20 px-6 bg-gray-900">
-      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 glow">Nasze usługi</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-        <a href="oferta-strony.html" class="group bg-gradient-to-br from-indigo-700 via-purple-700 to-pink-700 p-6 rounded-2xl shadow-xl hover:shadow-2xl transition transform hover:-translate-y-1 text-center block">
-          <div class="text-4xl mb-4">💻</div>
-          <h3 class="text-xl font-bold mb-2 text-white group-hover:text-yellow-300 transition">Tworzenie stron internetowych</h3>
-          <p class="text-white text-sm leading-relaxed">Projektujemy <span class="font-semibold text-pink-300">szybkie</span>, <span class="font-semibold text-purple-300">responsywne</span> i nowoczesne witryny.</p>
-        </a>
-        <a href="seo-hosting.html" class="group bg-gradient-to-br from-purple-700 via-indigo-700 to-blue-700 p-6 rounded-2xl shadow-xl hover:shadow-2xl transition transform hover:-translate-y-1 text-center block">
-          <div class="text-4xl mb-4">🌐</div>
-          <h3 class="text-xl font-bold mb-2 text-white group-hover:text-yellow-300 transition">SEO / Hosting & Zarządzanie</h3>
-          <p class="text-white text-sm leading-relaxed">Zwiększ widoczność <span class="font-semibold text-green-300">w Google</span> i zapewnij <span class="font-semibold text-blue-300">stabilność 24/7</span>.</p>
-        </a>
-        <a href="kontakt.html" class="group bg-gradient-to-br from-blue-700 via-purple-700 to-pink-700 p-6 rounded-2xl shadow-xl hover:shadow-2xl transition transform hover:-translate-y-1 text-center block">
-          <div class="text-4xl mb-4">📞</div>
-          <h3 class="text-xl font-bold mb-2 text-white group-hover:text-yellow-300 transition">Kontakt i Wsparcie</h3>
-          <p class="text-white text-sm leading-relaxed">Skontaktuj się z nami – <span class="font-semibold text-red-300">doradzimy</span>, <span class="font-semibold text-teal-300">wycenimy</span>.</p>
-        </a>
+  <footer>
+    <div class="footer-columns">
+      <div class="footer-column">
+        <h2>Email</h2>
+        <p>jankowalski@gmail.com</p>
       </div>
-    </section>
-
-    <!-- Dlaczego my -->
-    <section class="bg-gray-800 py-20 px-6 text-white">
-      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 glow">Dlaczego warto nas wybrać?</h2>
-      <div class="grid gap-10 max-w-6xl mx-auto sm:grid-cols-2 md:grid-cols-3 text-center">
-        <div class="p-6 bg-gray-900 rounded-2xl shadow-md hover:shadow-xl transition">
-          <div class="text-4xl mb-4">🚀</div>
-          <h3 class="text-xl font-semibold mb-2">Błyskawiczne działanie</h3>
-          <p class="text-sm text-gray-300">Strony, które ładują się w ułamku sekundy.</p>
-        </div>
-        <div class="p-6 bg-gray-900 rounded-2xl shadow-md hover:shadow-xl transition">
-          <div class="text-4xl mb-4">📱</div>
-          <h3 class="text-xl font-semibold mb-2">Responsywność</h3>
-          <p class="text-sm text-gray-300">Doskonały wygląd na każdym urządzeniu.</p>
-        </div>
-        <div class="p-6 bg-gray-900 rounded-2xl shadow-md hover:shadow-xl transition">
-          <div class="text-4xl mb-4">🧠</div>
-          <h3 class="text-xl font-semibold mb-2">Nowoczesne technologie</h3>
-          <p class="text-sm text-gray-300">Zawsze zgodnie z najnowszymi trendami.</p>
-        </div>
+      <div class="footer-column">
+        <h2>Telefon</h2>
+        <p>+48 xxx xxx xxx</p>
       </div>
-    </section>
-
-    <!-- Jak działamy -->
-    <section class="bg-gray-900 py-20 px-6 text-white">
-      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 glow">Jak działamy?</h2>
-      <div class="grid gap-10 max-w-5xl mx-auto sm:grid-cols-1 md:grid-cols-3 text-center">
-        <div class="p-6 bg-gray-800 rounded-2xl shadow-md">
-          <div class="text-3xl font-bold mb-2 text-yellow-400">1</div>
-          <h3 class="text-lg font-semibold mb-2">Kontakt</h3>
-          <p class="text-sm text-gray-300">Opowiedz nam, czego potrzebujesz – dobierzemy rozwiązanie.</p>
-        </div>
-        <div class="p-6 bg-gray-800 rounded-2xl shadow-md">
-          <div class="text-3xl font-bold mb-2 text-yellow-400">2</div>
-          <h3 class="text-lg font-semibold mb-2">Projekt</h3>
-          <p class="text-sm text-gray-300">Tworzymy projekt strony i wspólnie go dopracowujemy.</p>
-        </div>
-        <div class="p-6 bg-gray-800 rounded-2xl shadow-md">
-          <div class="text-3xl font-bold mb-2 text-yellow-400">3</div>
-          <h3 class="text-lg font-semibold mb-2">Realizacja</h3>
-          <p class="text-sm text-gray-300">Oddajemy gotową stronę i pomagamy ją uruchomić.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Modal -->
-    <div id="web-ad-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 hidden">
-      <div class="bg-white text-gray-900 p-8 rounded-2xl max-w-lg w-full shadow-2xl text-center relative">
-        <button onclick="closeAd()" class="absolute top-4 right-4 text-gray-900 hover:text-gray-800 text-xl">&times;</button>
-        <h2 class="text-2xl font-bold mb-1 text-black">Potrzebujesz strony internetowej?</h2>
-        <p class="mb-4 text-black font-medium leading-relaxed">
-          Oferujemy nowoczesne, szybkie i responsywne strony dopasowane do Twojego biznesu.
-        </p>
-        <a href="oferta-strony.html" class="button-glow inline-block">Dowiedz się więcej</a>
+      <div class="footer-column">
+        <h2>Facebook</h2>
+        <p>Jan Kowalski</p>
       </div>
     </div>
-
-    <!-- Stopka -->
-    <footer class="bg-gray-950 text-center py-10 text-sm text-gray-400">
-      © 2025 Bitnestic. Wszelkie prawa zastrzeżone.
-    </footer>
-
-    <!-- Skrypt do modala -->
-    <script>
-      const adModal = document.getElementById("web-ad-modal");
-      const showAdBtn = document.getElementById("show-ad");
-      showAdBtn?.addEventListener("click", () => {
-        adModal.classList.remove("hidden");
-      });
-      function closeAd() {
-        adModal.classList.add("hidden");
-      }
-    </script>
-
-  </body>
+  </footer>
+</body>
 </html>
